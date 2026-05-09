@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as BecarioRouteImport } from './routes/becario'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BecarioIndexRouteImport } from './routes/becario.index'
+import { Route as BecarioProgresoRouteImport } from './routes/becario.progreso'
+import { Route as BecarioOnboardingRouteImport } from './routes/becario.onboarding'
+import { Route as BecarioCertificadoRouteImport } from './routes/becario.certificado'
+import { Route as BecarioBoletaSalidaRouteImport } from './routes/becario.boleta-salida'
 
 const BecarioRoute = BecarioRouteImport.update({
   id: '/becario',
@@ -22,31 +27,91 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BecarioIndexRoute = BecarioIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BecarioRoute,
+} as any)
+const BecarioProgresoRoute = BecarioProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => BecarioRoute,
+} as any)
+const BecarioOnboardingRoute = BecarioOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => BecarioRoute,
+} as any)
+const BecarioCertificadoRoute = BecarioCertificadoRouteImport.update({
+  id: '/certificado',
+  path: '/certificado',
+  getParentRoute: () => BecarioRoute,
+} as any)
+const BecarioBoletaSalidaRoute = BecarioBoletaSalidaRouteImport.update({
+  id: '/boleta-salida',
+  path: '/boleta-salida',
+  getParentRoute: () => BecarioRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/becario': typeof BecarioRoute
+  '/becario': typeof BecarioRouteWithChildren
+  '/becario/boleta-salida': typeof BecarioBoletaSalidaRoute
+  '/becario/certificado': typeof BecarioCertificadoRoute
+  '/becario/onboarding': typeof BecarioOnboardingRoute
+  '/becario/progreso': typeof BecarioProgresoRoute
+  '/becario/': typeof BecarioIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/becario': typeof BecarioRoute
+  '/becario/boleta-salida': typeof BecarioBoletaSalidaRoute
+  '/becario/certificado': typeof BecarioCertificadoRoute
+  '/becario/onboarding': typeof BecarioOnboardingRoute
+  '/becario/progreso': typeof BecarioProgresoRoute
+  '/becario': typeof BecarioIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/becario': typeof BecarioRoute
+  '/becario': typeof BecarioRouteWithChildren
+  '/becario/boleta-salida': typeof BecarioBoletaSalidaRoute
+  '/becario/certificado': typeof BecarioCertificadoRoute
+  '/becario/onboarding': typeof BecarioOnboardingRoute
+  '/becario/progreso': typeof BecarioProgresoRoute
+  '/becario/': typeof BecarioIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/becario'
+  fullPaths:
+    | '/'
+    | '/becario'
+    | '/becario/boleta-salida'
+    | '/becario/certificado'
+    | '/becario/onboarding'
+    | '/becario/progreso'
+    | '/becario/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/becario'
-  id: '__root__' | '/' | '/becario'
+  to:
+    | '/'
+    | '/becario/boleta-salida'
+    | '/becario/certificado'
+    | '/becario/onboarding'
+    | '/becario/progreso'
+    | '/becario'
+  id:
+    | '__root__'
+    | '/'
+    | '/becario'
+    | '/becario/boleta-salida'
+    | '/becario/certificado'
+    | '/becario/onboarding'
+    | '/becario/progreso'
+    | '/becario/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BecarioRoute: typeof BecarioRoute
+  BecarioRoute: typeof BecarioRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +130,66 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/becario/': {
+      id: '/becario/'
+      path: '/'
+      fullPath: '/becario/'
+      preLoaderRoute: typeof BecarioIndexRouteImport
+      parentRoute: typeof BecarioRoute
+    }
+    '/becario/progreso': {
+      id: '/becario/progreso'
+      path: '/progreso'
+      fullPath: '/becario/progreso'
+      preLoaderRoute: typeof BecarioProgresoRouteImport
+      parentRoute: typeof BecarioRoute
+    }
+    '/becario/onboarding': {
+      id: '/becario/onboarding'
+      path: '/onboarding'
+      fullPath: '/becario/onboarding'
+      preLoaderRoute: typeof BecarioOnboardingRouteImport
+      parentRoute: typeof BecarioRoute
+    }
+    '/becario/certificado': {
+      id: '/becario/certificado'
+      path: '/certificado'
+      fullPath: '/becario/certificado'
+      preLoaderRoute: typeof BecarioCertificadoRouteImport
+      parentRoute: typeof BecarioRoute
+    }
+    '/becario/boleta-salida': {
+      id: '/becario/boleta-salida'
+      path: '/boleta-salida'
+      fullPath: '/becario/boleta-salida'
+      preLoaderRoute: typeof BecarioBoletaSalidaRouteImport
+      parentRoute: typeof BecarioRoute
+    }
   }
 }
 
+interface BecarioRouteChildren {
+  BecarioBoletaSalidaRoute: typeof BecarioBoletaSalidaRoute
+  BecarioCertificadoRoute: typeof BecarioCertificadoRoute
+  BecarioOnboardingRoute: typeof BecarioOnboardingRoute
+  BecarioProgresoRoute: typeof BecarioProgresoRoute
+  BecarioIndexRoute: typeof BecarioIndexRoute
+}
+
+const BecarioRouteChildren: BecarioRouteChildren = {
+  BecarioBoletaSalidaRoute: BecarioBoletaSalidaRoute,
+  BecarioCertificadoRoute: BecarioCertificadoRoute,
+  BecarioOnboardingRoute: BecarioOnboardingRoute,
+  BecarioProgresoRoute: BecarioProgresoRoute,
+  BecarioIndexRoute: BecarioIndexRoute,
+}
+
+const BecarioRouteWithChildren =
+  BecarioRoute._addFileChildren(BecarioRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BecarioRoute: BecarioRoute,
+  BecarioRoute: BecarioRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
