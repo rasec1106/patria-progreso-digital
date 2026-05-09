@@ -1,0 +1,17 @@
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { BecarioSidebar } from "@/components/BecarioSidebar";
+
+export const Route = createFileRoute("/becario")({
+  component: BecarioLayout,
+});
+
+function BecarioLayout() {
+  return (
+    <div className="min-h-screen flex bg-background">
+      <BecarioSidebar />
+      <main className="flex-1 min-w-0">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
