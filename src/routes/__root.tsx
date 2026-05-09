@@ -75,11 +75,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Patria C — Plataforma de evaluación" },
       { name: "description", content: "Academia ciudadana de #PerúTeQuiero. Forma jóvenes peruanos en liderazgo y democracia." },
       { name: "author", content: "Patria C" },
-      { property: "og:title", content: "Patria C — Tu camino ciudadano empieza aquí" },
-      { property: "og:description", content: "Academia ciudadana de #PerúTeQuiero." },
+      { property: "og:title", content: "Patria C — Plataforma de evaluación" },
+      { property: "og:description", content: "Academia ciudadana de #PerúTeQuiero. Forma jóvenes peruanos en liderazgo y democracia." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Patria C — Plataforma de evaluación" },
+      { name: "twitter:description", content: "Academia ciudadana de #PerúTeQuiero. Forma jóvenes peruanos en liderazgo y democracia." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/04bdc937-0c81-4a50-81cc-5134e0f6e2ca/id-preview-f0c12b80--08e71c51-36bc-4c9e-a9a3-0631cea481e8.lovable.app-1778342013507.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/04bdc937-0c81-4a50-81cc-5134e0f6e2ca/id-preview-f0c12b80--08e71c51-36bc-4c9e-a9a3-0631cea481e8.lovable.app-1778342013507.png" },
     ],
     links: [
       {
