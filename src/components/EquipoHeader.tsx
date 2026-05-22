@@ -1,12 +1,13 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { LayoutGrid, AlertTriangle, FileBarChart, Award, Bell, Search, X } from "lucide-react";
+import { LayoutGrid, AlertTriangle, FileBarChart, Award, Users2, Bell, Search, X } from "lucide-react";
 
 const tabs = [
   { to: "/equipo", label: "Cohorte", icon: LayoutGrid, exact: true },
   { to: "/equipo/alertas", label: "Alertas", icon: AlertTriangle },
   { to: "/equipo/reportes", label: "Reportes", icon: FileBarChart },
   { to: "/equipo/certificados", label: "Certificados", icon: Award },
+  { to: "/equipo/alumni", label: "Red Alumni", icon: Users2 },
 ];
 
 export function EquipoHeader() {

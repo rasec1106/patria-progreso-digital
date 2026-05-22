@@ -7,7 +7,7 @@ const items = [
   { to: "/becario/progreso", label: "Mi progreso", icon: LineChart },
   { to: "/becario/sesiones", label: "Mis sesiones", icon: CalendarDays },
   { to: "/becario/mentor", label: "Mi mentor", icon: UserRound },
-  { to: "/alumni", label: "Red Alumni", icon: Users2 },
+  { to: "/becario/alumni", label: "Red Alumni", icon: Users2 },
   { to: "/becario/certificado", label: "Mi certificado", icon: Award },
 ];
 

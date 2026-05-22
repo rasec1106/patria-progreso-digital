@@ -10,7 +10,7 @@ const main = [
 ];
 
 const more = [
-  { to: "/alumni", label: "Red Alumni", icon: Users2 },
+  { to: "/becario/alumni", label: "Red Alumni", icon: Users2 },
   { to: "/becario/certificado", label: "Mi certificado", icon: Award },
   { to: "/", label: "Cerrar sesión", icon: LogOut },
 ];

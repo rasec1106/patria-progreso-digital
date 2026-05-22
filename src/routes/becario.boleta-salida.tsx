@@ -132,7 +132,7 @@ function Celebracion() {
           <Link to="/becario/certificado" className="touch-target gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 press focusable">
             <Download className="size-4" /> Descargar mi certificado
           </Link>
-          <Link to="/alumni" className="touch-target gap-2 px-5 py-3 rounded-lg border border-border hover:border-primary text-sm font-medium press focusable">
+          <Link to="/becario/alumni" className="touch-target gap-2 px-5 py-3 rounded-lg border border-border hover:border-primary text-sm font-medium press focusable">
             <Users2 className="size-4" /> Entrar a la Red Alumni
           </Link>
         </div>
