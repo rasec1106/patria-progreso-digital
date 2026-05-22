@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { MapPin, Briefcase, UserSearch, HelpCircle } from "lucide-react";
+import { useState } from "react";
+import { MapPin, Briefcase, UserSearch } from "lucide-react";
 import { ALUMNI, odsLabel } from "@/lib/mock-data";
 import { EmptyState } from "@/components/EmptyState";
 import { PageHeader } from "@/components/PageHeader";
+import { HelpTip } from "@/components/HelpTip";
 
 type Props = {
   role: "becario" | "equipo";
@@ -12,24 +13,6 @@ export function AlumniNetwork({ role }: Props) {
   const [region, setRegion] = useState("Todas");
   const [edicion, setEdicion] = useState("Todas");
   const [ods, setOds] = useState("Todos");
-  const [odsHelp, setOdsHelp] = useState(false);
-  const odsHelpRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (!odsHelp) return;
-    const onPointerDown = (e: PointerEvent) => {
-      if (!odsHelpRef.current?.contains(e.target as Node)) setOdsHelp(false);
-    };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOdsHelp(false);
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [odsHelp]);
 
   const filtered = ALUMNI.filter((a) =>
     (region === "Todas" || a.region === region) &&
@@ -60,23 +43,9 @@ export function AlumniNetwork({ role }: Props) {
         <label className="flex-1 sm:flex-none sm:w-44">
           <span className="flex items-center gap-1 mb-1 h-4 text-eyebrow tracking-wide leading-none">
             ODS
-            <span ref={odsHelpRef} className="relative inline-flex">
-              <button
-                type="button"
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOdsHelp((v) => !v); }}
-                aria-label="¿Qué es ODS?"
-                aria-expanded={odsHelp}
-                className="inline-grid place-items-center size-4 rounded-full text-muted-foreground hover:text-foreground focusable"
-              >
-                <HelpCircle className="size-3.5" />
-              </button>
-              {odsHelp && (
-                <span className="absolute top-full right-0 mt-1 z-50 w-56 max-w-[min(14rem,calc(100vw-2rem))] rounded-lg border border-border bg-surface shadow-md p-3 text-xs font-normal normal-case tracking-normal text-foreground fade-in">
-                  <strong className="font-semibold">Objetivo de Desarrollo Sostenible</strong>
-                  <span className="block mt-1 text-muted-foreground">Los 17 objetivos de la ONU (Agenda 2030) en los que trabaja cada egresado.</span>
-                </span>
-              )}
-            </span>
+            <HelpTip title="Objetivo de Desarrollo Sostenible" label="¿Qué es ODS?" align="right">
+              Los 17 objetivos de la ONU (Agenda 2030) en los que trabaja cada egresado.
+            </HelpTip>
           </span>
           <select value={ods} onChange={(e) => setOds(e.target.value)} className="w-full text-sm min-h-[44px] px-3 rounded-md border border-border bg-surface focusable truncate">
             <option value="Todos">Todos</option>{Array.from(new Set(ALUMNI.flatMap(a => a.ods))).map(o => <option key={o} value={o}>{odsLabel(o)}</option>)}

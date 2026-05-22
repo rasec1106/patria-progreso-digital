@@ -99,28 +99,59 @@ export const FEEDBACK_DIEGO: Feedback[] = [
 ];
 
 export type Sesion = {
-  numero: number; titulo: string; fecha: string; modalidad: "Presencial" | "Virtual"; bloque: string;
+  numero: number; titulo: string; fecha: string; hora: string;
+  modalidad: "Presencial" | "Virtual"; bloque: string;
+  estado: "completada" | "pendiente";
 };
+// Las 26 sesiones del programa, en orden. Las 12 primeras están completadas
+// ("Vas en la 12"); el resto están por completar y se agrupan por bloque.
 export const SESIONES: Sesion[] = [
-  { numero: 1, titulo: "Bienvenida: ¿qué significa ser ciudadano hoy?", fecha: "20 ene", modalidad: "Virtual", bloque: "Propósito" },
-  { numero: 2, titulo: "Mi historia, mi región, mi voz", fecha: "27 ene", modalidad: "Virtual", bloque: "Propósito" },
-  { numero: 3, titulo: "La Constitución como pacto vivo", fecha: "3 feb", modalidad: "Virtual", bloque: "Democracia" },
-  { numero: 4, titulo: "Partidos, elecciones y representación", fecha: "10 feb", modalidad: "Virtual", bloque: "Democracia" },
-  { numero: 5, titulo: "Bootcamp Lima: instituciones por dentro", fecha: "17 feb", modalidad: "Presencial", bloque: "Estado" },
-  { numero: 6, titulo: "Función pública y carrera meritocrática", fecha: "24 feb", modalidad: "Virtual", bloque: "Estado" },
-  { numero: 7, titulo: "Presupuesto público explicado", fecha: "3 mar", modalidad: "Virtual", bloque: "Economía" },
-  { numero: 8, titulo: "Modelo económico peruano: virtudes y deudas", fecha: "10 mar", modalidad: "Virtual", bloque: "Economía" },
-  { numero: 9, titulo: "Escucha activa y conversaciones difíciles", fecha: "17 mar", modalidad: "Virtual", bloque: "Diálogo" },
-  { numero: 10, titulo: "Bootcamp Arequipa: diseñando proyectos de impacto", fecha: "24 mar", modalidad: "Presencial", bloque: "Diálogo" },
-  { numero: 11, titulo: "Vigilancia ciudadana con datos abiertos", fecha: "31 mar", modalidad: "Virtual", bloque: "Activismo" },
-  { numero: 12, titulo: "Movilización ética y no violencia", fecha: "7 abr", modalidad: "Virtual", bloque: "Activismo" },
+  { numero: 1, titulo: "Bienvenida: ¿qué significa ser ciudadano hoy?", fecha: "20 ene", hora: "19:00", modalidad: "Virtual", bloque: "Propósito", estado: "completada" },
+  { numero: 2, titulo: "Mi historia, mi región, mi voz", fecha: "27 ene", hora: "19:00", modalidad: "Virtual", bloque: "Propósito", estado: "completada" },
+  { numero: 3, titulo: "Valores republicanos y ética pública", fecha: "3 feb", hora: "19:00", modalidad: "Virtual", bloque: "Propósito", estado: "completada" },
+  { numero: 4, titulo: "La Constitución como pacto vivo", fecha: "10 feb", hora: "19:00", modalidad: "Virtual", bloque: "Democracia", estado: "completada" },
+  { numero: 5, titulo: "Partidos, elecciones y representación", fecha: "17 feb", hora: "19:00", modalidad: "Virtual", bloque: "Democracia", estado: "completada" },
+  { numero: 6, titulo: "Separación de poderes y contrapesos", fecha: "24 feb", hora: "19:00", modalidad: "Virtual", bloque: "Democracia", estado: "completada" },
+  { numero: 7, titulo: "Descentralización y gobiernos regionales", fecha: "3 mar", hora: "19:00", modalidad: "Virtual", bloque: "Democracia", estado: "completada" },
+  { numero: 8, titulo: "Bootcamp Lima: instituciones por dentro", fecha: "10 mar", hora: "09:00", modalidad: "Presencial", bloque: "Estado", estado: "completada" },
+  { numero: 9, titulo: "Función pública y carrera meritocrática", fecha: "17 mar", hora: "19:00", modalidad: "Virtual", bloque: "Estado", estado: "completada" },
+  { numero: 10, titulo: "Servicios públicos y ciudadanía", fecha: "24 mar", hora: "19:00", modalidad: "Virtual", bloque: "Estado", estado: "completada" },
+  { numero: 11, titulo: "Transparencia y acceso a la información", fecha: "31 mar", hora: "19:00", modalidad: "Virtual", bloque: "Estado", estado: "completada" },
+  { numero: 12, titulo: "Presupuesto público explicado", fecha: "7 abr", hora: "19:00", modalidad: "Virtual", bloque: "Economía", estado: "completada" },
+  { numero: 13, titulo: "Modelo económico peruano: virtudes y deudas", fecha: "14 abr", hora: "19:00", modalidad: "Virtual", bloque: "Economía", estado: "pendiente" },
+  { numero: 14, titulo: "Informalidad y desarrollo productivo", fecha: "21 abr", hora: "19:00", modalidad: "Virtual", bloque: "Economía", estado: "pendiente" },
+  { numero: 15, titulo: "Economía regional y cierre de brechas", fecha: "28 abr", hora: "19:00", modalidad: "Virtual", bloque: "Economía", estado: "pendiente" },
+  { numero: 16, titulo: "Escucha activa y conversaciones difíciles", fecha: "5 may", hora: "19:00", modalidad: "Virtual", bloque: "Diálogo", estado: "pendiente" },
+  { numero: 17, titulo: "Bootcamp Arequipa: diseñando proyectos de impacto", fecha: "12 may", hora: "09:00", modalidad: "Presencial", bloque: "Diálogo", estado: "pendiente" },
+  { numero: 18, titulo: "Construcción de consensos y mediación", fecha: "19 may", hora: "19:00", modalidad: "Virtual", bloque: "Diálogo", estado: "pendiente" },
+  { numero: 19, titulo: "Vigilancia ciudadana con datos abiertos", fecha: "26 may", hora: "19:00", modalidad: "Virtual", bloque: "Activismo", estado: "pendiente" },
+  { numero: 20, titulo: "Movilización ética y no violencia", fecha: "2 jun", hora: "19:00", modalidad: "Virtual", bloque: "Activismo", estado: "pendiente" },
+  { numero: 21, titulo: "Periodismo, redes y verdad", fecha: "9 jun", hora: "19:00", modalidad: "Virtual", bloque: "Activismo", estado: "pendiente" },
+  { numero: 22, titulo: "Bootcamp San Martín: ciudadanía amazónica", fecha: "16 jun", hora: "08:30", modalidad: "Presencial", bloque: "Activismo", estado: "pendiente" },
+  { numero: 23, titulo: "Diseño de proyecto final", fecha: "23 jun", hora: "19:00", modalidad: "Virtual", bloque: "Liderazgo", estado: "pendiente" },
+  { numero: 24, titulo: "Liderazgo público y vocería", fecha: "30 jun", hora: "19:00", modalidad: "Virtual", bloque: "Liderazgo", estado: "pendiente" },
+  { numero: 25, titulo: "Mentoría y sostenibilidad del proyecto", fecha: "7 jul", hora: "19:00", modalidad: "Virtual", bloque: "Liderazgo", estado: "pendiente" },
+  { numero: 26, titulo: "Demo Day: presenta tu proyecto", fecha: "14 jul", hora: "09:00", modalidad: "Presencial", bloque: "Liderazgo", estado: "pendiente" },
 ];
 
-export const PROXIMAS_SESIONES = [
-  { numero: 13, titulo: "Periodismo, redes y verdad", fecha: "Mar 14 may", hora: "19:00", modalidad: "Virtual" as const },
-  { numero: 14, titulo: "Bootcamp San Martín: ciudadanía amazónica", fecha: "Sáb 25 may", hora: "08:30", modalidad: "Presencial" as const },
-  { numero: 15, titulo: "Diseño de proyecto final", fecha: "Mar 4 jun", hora: "19:00", modalidad: "Virtual" as const },
-];
+/** Las próximas sesiones por completar, para seguimiento rápido. */
+export const PROXIMAS_SESIONES = SESIONES.filter((s) => s.estado === "pendiente").slice(0, 5);
+
+/** Objetivo de cada bloque del programa, indexado por su nombre. */
+export const BLOQUES: Record<string, string> = {
+  "Propósito": "Definir tu rol como ciudadano y el aporte que quieres dejar en tu comunidad.",
+  "Democracia": "Entender las instituciones, el voto y los mecanismos de participación democrática.",
+  "Estado": "Conocer cómo opera el Estado, la carrera pública y la gestión transparente de recursos.",
+  "Economía": "Manejar los conceptos económicos clave para leer al país y proponer desarrollo sostenible.",
+  "Diálogo": "Aprender a escuchar al otro, construir acuerdos y procesar la diferencia.",
+  "Activismo": "Adquirir herramientas para fiscalizar, denunciar y movilizar de forma ética y efectiva.",
+  "Liderazgo": "Liderar tu proyecto de impacto, comunicarlo con claridad y sostenerlo en el tiempo.",
+};
+
+/** Devuelve el objetivo de un bloque, o undefined si no está registrado. */
+export function bloqueObjetivo(bloque: string): string | undefined {
+  return BLOQUES[bloque];
+}
 
 export const ALIADOS = ["Delosi", "BCP", "Scotiabank", "Ferreycorp"];
 

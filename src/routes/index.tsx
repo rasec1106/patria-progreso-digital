@@ -39,7 +39,6 @@ function Landing() {
           </p>
 
           <div className="mt-10">
-            <p className="text-sm font-medium mb-3">Para el prototipo, ingresa con:</p>
             <div className="grid sm:grid-cols-2 gap-4 stagger">
               <Link to="/becario" className="group card-soft p-5 hover:border-primary transition-all press focusable">
                 <div className="size-10 rounded-lg bg-primary/10 text-primary grid place-items-center mb-3">
@@ -62,14 +61,13 @@ function Landing() {
                 </span>
               </Link>
             </div>
-            <p className="mt-3 text-xs text-muted-foreground">Selector visual sin login real, solo para esta validación.</p>
           </div>
         </section>
 
         <section className="relative">
-          <div className="aspect-[16/10] sm:aspect-[4/3] lg:aspect-[4/5] rounded-3xl overflow-hidden patria-gradient relative shadow-xl">
+          <div className="rounded-3xl overflow-hidden patria-gradient relative shadow-xl sm:aspect-[4/3] lg:aspect-[4/5]">
             <div className="absolute inset-0 mix-blend-overlay opacity-30 bg-[radial-gradient(circle_at_30%_20%,white,transparent_50%)]" />
-            <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end text-primary-foreground">
+            <div className="relative p-6 sm:p-8 flex flex-col justify-end text-primary-foreground sm:absolute sm:inset-0">
               <p className="font-serif text-2xl leading-tight">
                 "Quiero que mi región tenga voz en Lima."
               </p>
@@ -80,11 +78,6 @@ function Landing() {
                 <Stat n="100%" l="becas cubiertas" />
               </div>
             </div>
-          </div>
-          <div className="absolute -bottom-6 -left-6 hidden md:block card-soft p-4 max-w-[220px]">
-            <p className="text-meta">Crecimiento promedio</p>
-            <p className="text-2xl font-semibold text-success">+1.4 pts</p>
-            <p className="text-meta">en las 6 dimensiones ciudadanas</p>
           </div>
         </section>
       </main>

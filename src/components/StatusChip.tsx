@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { AlertTriangle, CheckCircle2, Video, MapPin, Check, Award } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Video, MapPin, Check, Award, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const chipVariants = cva(
@@ -14,6 +14,7 @@ const chipVariants = cva(
         presencial: "bg-primary/10 text-primary border-primary/20",
         virtual: "bg-muted text-muted-foreground border-border",
         completada: "bg-success/10 text-success border-success/30",
+        pendiente: "bg-transparent text-muted-foreground border-border",
         criterios: "bg-success/10 text-success border-success/30",
       },
     },
@@ -32,6 +33,7 @@ const defaults: Record<
   presencial: { label: "Presencial", icon: MapPin },
   virtual: { label: "Virtual", icon: Video },
   completada: { label: "Completada", icon: CheckCircle2 },
+  pendiente: { label: "Pendiente", icon: Clock },
   criterios: { label: "Cumple criterios", icon: Check },
 };
 
