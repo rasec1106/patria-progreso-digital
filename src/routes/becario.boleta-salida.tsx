@@ -17,10 +17,10 @@ function Salida() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-2xl mx-auto px-6 py-10 fade-in">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-32 sm:pb-10 fade-in">
         <header className="mb-6">
           <p className="text-sm text-primary font-medium">Boleta de salida · Edición 4</p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight font-serif">
+          <h1 className="mt-1 text-xl sm:text-2xl font-semibold tracking-tight font-serif">
             Mírate ahora, mira al Diego que llegó. Lo que escribas hoy es tu testimonio.
           </h1>
           <div className="mt-5 h-1.5 bg-border rounded-full overflow-hidden">
@@ -29,21 +29,23 @@ function Salida() {
           <p className="mt-2 text-xs text-muted-foreground">Dimensión {step+1} de {DIMENSIONS.length}: {dim.label}</p>
         </header>
 
-        <div className="card-soft p-6 lg:p-8 fade-in" key={step}>
-          <h2 className="text-xl font-semibold">{dim.label}</h2>
+        <div className="card-soft p-5 sm:p-8 fade-in" key={step}>
+          <h2 className="text-lg sm:text-xl font-semibold">{dim.label}</h2>
           <p className="mt-1 text-sm text-muted-foreground">{dim.description}</p>
 
-          <div className="mt-5 grid grid-cols-2 gap-3">
-            <div className="rounded-lg border border-dashed border-border p-3 bg-muted/30">
+          {/* Entrada (compact card on top in mobile, left column on desktop) */}
+          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="rounded-lg border border-dashed border-border p-3 bg-muted/30 flex sm:block items-center justify-between gap-3">
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Tu boleta de entrada</p>
-              <p className="mt-1 text-3xl font-semibold text-muted-foreground">{DIEGO.entrada[dim.key]}</p>
-              <p className="text-[11px] text-muted-foreground">de 5</p>
+              <p className="sm:mt-1 text-2xl sm:text-3xl font-semibold text-muted-foreground">
+                {DIEGO.entrada[dim.key]}<span className="text-xs text-muted-foreground font-normal"> /5</span>
+              </p>
             </div>
             <div className="rounded-lg border border-primary/30 p-3 bg-primary/5">
               <p className="text-[11px] uppercase tracking-wider text-primary">Hoy te das</p>
-              <div className="mt-2 flex gap-1">
+              <div className="mt-2 flex gap-1.5">
                 {[1,2,3,4,5].map((n) => (
-                  <button key={n} className={`flex-1 h-10 rounded border text-sm font-medium ${n === Math.round(DIEGO.actual[dim.key]) ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/50"}`}>
+                  <button key={n} className={`flex-1 min-h-[44px] rounded border text-sm font-medium ${n === Math.round(DIEGO.actual[dim.key]) ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/50"}`}>
                     {n}
                   </button>
                 ))}
@@ -56,21 +58,51 @@ function Salida() {
             <textarea rows={4} className="mt-2 w-full p-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none" placeholder="Una historia, una sesión, una conversación que te marcó..." />
           </div>
 
-          <div className="mt-7 flex items-center justify-between">
-            <button onClick={() => setStep((s) => Math.max(0, s-1))} disabled={step === 0} className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground disabled:opacity-30">
+          {/* Desktop inline actions */}
+          <div className="mt-7 hidden sm:flex items-center justify-between">
+            <button onClick={() => setStep((s) => Math.max(0, s-1))} disabled={step === 0} className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground disabled:opacity-30 min-h-[44px] px-2">
               <ArrowLeft className="size-4" /> Anterior
             </button>
             {step < DIMENSIONS.length - 1 ? (
-              <button onClick={() => setStep((s) => s+1)} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90">
+              <button onClick={() => setStep((s) => s+1)} className="inline-flex items-center gap-2 px-5 min-h-[44px] rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90">
                 Siguiente <ArrowRight className="size-4" />
               </button>
             ) : (
-              <button onClick={() => setDone(true)} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-success text-success-foreground text-sm font-medium hover:opacity-90">
+              <button onClick={() => setDone(true)} className="inline-flex items-center gap-2 px-5 min-h-[44px] rounded-lg bg-success text-success-foreground text-sm font-medium hover:opacity-90">
                 Cerrar mi camino <Sparkles className="size-4" />
               </button>
             )}
           </div>
         </div>
+      </div>
+
+      {/* Mobile sticky bottom bar */}
+      <div
+        className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-surface/95 backdrop-blur border-t border-border px-4 py-3 flex items-center gap-3"
+        style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+      >
+        <button
+          onClick={() => setStep((s) => Math.max(0, s-1))}
+          disabled={step === 0}
+          className="min-h-[48px] px-4 rounded-lg border border-border text-sm font-medium disabled:opacity-30 inline-flex items-center gap-1.5"
+        >
+          <ArrowLeft className="size-4" /> Atrás
+        </button>
+        {step < DIMENSIONS.length - 1 ? (
+          <button
+            onClick={() => setStep((s) => s+1)}
+            className="flex-1 min-h-[48px] rounded-lg bg-primary text-primary-foreground text-sm font-semibold inline-flex items-center justify-center gap-2"
+          >
+            Siguiente <ArrowRight className="size-4" />
+          </button>
+        ) : (
+          <button
+            onClick={() => setDone(true)}
+            className="flex-1 min-h-[48px] rounded-lg bg-success text-success-foreground text-sm font-semibold inline-flex items-center justify-center gap-2"
+          >
+            Cerrar mi camino <Sparkles className="size-4" />
+          </button>
+        )}
       </div>
     </div>
   );
