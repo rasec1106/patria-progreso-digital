@@ -138,3 +138,30 @@ export const ALUMNI = [
   { id: "a5", nombre: "Sofía Ataucusi Yupanqui", region: "Cusco", edicion: 3, area: "Salud comunitaria", proyecto: "Brigadas de salud rural", ods: ["ODS 3","ODS 10"], avatar: "https://api.dicebear.com/9.x/initials/svg?seed=Sofia%20Ataucusi&backgroundColor=E08E00&textColor=1A1A1A" },
   { id: "a6", nombre: "Bruno Cárdenas Polo", region: "Ucayali", edicion: 1, area: "Medio ambiente", proyecto: "Red de monitoreo de deforestación", ods: ["ODS 13","ODS 15"], avatar: "https://api.dicebear.com/9.x/initials/svg?seed=Bruno%20Cardenas&backgroundColor=C8102E&textColor=ffffff" },
 ];
+
+// Objetivos de Desarrollo Sostenible (ONU, Agenda 2030)
+export const ODS_NOMBRES: Record<string, string> = {
+  "ODS 1": "Fin de la pobreza",
+  "ODS 2": "Hambre cero",
+  "ODS 3": "Salud y bienestar",
+  "ODS 4": "Educación de calidad",
+  "ODS 5": "Igualdad de género",
+  "ODS 6": "Agua limpia y saneamiento",
+  "ODS 7": "Energía asequible y no contaminante",
+  "ODS 8": "Trabajo decente y crecimiento económico",
+  "ODS 9": "Industria, innovación e infraestructura",
+  "ODS 10": "Reducción de las desigualdades",
+  "ODS 11": "Ciudades y comunidades sostenibles",
+  "ODS 12": "Producción y consumo responsables",
+  "ODS 13": "Acción por el clima",
+  "ODS 14": "Vida submarina",
+  "ODS 15": "Vida de ecosistemas terrestres",
+  "ODS 16": "Paz, justicia e instituciones sólidas",
+  "ODS 17": "Alianzas para lograr los objetivos",
+};
+
+/** Devuelve el ODS con su nombre completo, p. ej. "ODS 16 · Paz, justicia e instituciones sólidas". */
+export function odsLabel(ods: string): string {
+  const nombre = ODS_NOMBRES[ods];
+  return nombre ? `${ods} · ${nombre}` : ods;
+}

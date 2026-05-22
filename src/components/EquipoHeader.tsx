@@ -61,7 +61,7 @@ export function EquipoHeader() {
         </div>
       )}
 
-      <nav className="max-w-[1400px] mx-auto px-4 sm:px-6 flex gap-1 overflow-x-auto">
+      <nav className="hidden lg:flex max-w-[1400px] mx-auto px-4 sm:px-6 gap-1 overflow-x-auto">
         {tabs.map((t) => {
           const active = t.exact ? path === t.to : path.startsWith(t.to);
           const Icon = t.icon;
