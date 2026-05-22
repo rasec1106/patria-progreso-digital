@@ -99,28 +99,48 @@ export const FEEDBACK_DIEGO: Feedback[] = [
 ];
 
 export type Sesion = {
-  numero: number; titulo: string; fecha: string; modalidad: "Presencial" | "Virtual"; bloque: string;
+  numero: number; titulo: string; fecha: string; hora: string;
+  modalidad: "Presencial" | "Virtual"; dimension: string;
+  estado: "completada" | "pendiente";
 };
+// Las 26 sesiones del programa, en orden y agrupadas en las 6 dimensiones que se
+// evalúan en "Mi progreso". Las 12 primeras están completadas ("Vas en la 12").
 export const SESIONES: Sesion[] = [
-  { numero: 1, titulo: "Bienvenida: ¿qué significa ser ciudadano hoy?", fecha: "20 ene", modalidad: "Virtual", bloque: "Propósito" },
-  { numero: 2, titulo: "Mi historia, mi región, mi voz", fecha: "27 ene", modalidad: "Virtual", bloque: "Propósito" },
-  { numero: 3, titulo: "La Constitución como pacto vivo", fecha: "3 feb", modalidad: "Virtual", bloque: "Democracia" },
-  { numero: 4, titulo: "Partidos, elecciones y representación", fecha: "10 feb", modalidad: "Virtual", bloque: "Democracia" },
-  { numero: 5, titulo: "Bootcamp Lima: instituciones por dentro", fecha: "17 feb", modalidad: "Presencial", bloque: "Estado" },
-  { numero: 6, titulo: "Función pública y carrera meritocrática", fecha: "24 feb", modalidad: "Virtual", bloque: "Estado" },
-  { numero: 7, titulo: "Presupuesto público explicado", fecha: "3 mar", modalidad: "Virtual", bloque: "Economía" },
-  { numero: 8, titulo: "Modelo económico peruano: virtudes y deudas", fecha: "10 mar", modalidad: "Virtual", bloque: "Economía" },
-  { numero: 9, titulo: "Escucha activa y conversaciones difíciles", fecha: "17 mar", modalidad: "Virtual", bloque: "Diálogo" },
-  { numero: 10, titulo: "Bootcamp Arequipa: diseñando proyectos de impacto", fecha: "24 mar", modalidad: "Presencial", bloque: "Diálogo" },
-  { numero: 11, titulo: "Vigilancia ciudadana con datos abiertos", fecha: "31 mar", modalidad: "Virtual", bloque: "Activismo" },
-  { numero: 12, titulo: "Movilización ética y no violencia", fecha: "7 abr", modalidad: "Virtual", bloque: "Activismo" },
+  { numero: 1, titulo: "Bienvenida: ¿qué significa ser ciudadano hoy?", fecha: "20 ene", hora: "19:00", modalidad: "Virtual", dimension: "Propósito", estado: "completada" },
+  { numero: 2, titulo: "Mi historia, mi región, mi voz", fecha: "27 ene", hora: "19:00", modalidad: "Virtual", dimension: "Propósito", estado: "completada" },
+  { numero: 3, titulo: "Valores republicanos y ética pública", fecha: "3 feb", hora: "19:00", modalidad: "Virtual", dimension: "Propósito", estado: "completada" },
+  { numero: 4, titulo: "Mi propósito ciudadano: del yo al nosotros", fecha: "10 feb", hora: "19:00", modalidad: "Virtual", dimension: "Propósito", estado: "completada" },
+  { numero: 5, titulo: "La Constitución como pacto vivo", fecha: "17 feb", hora: "19:00", modalidad: "Virtual", dimension: "Democracia", estado: "completada" },
+  { numero: 6, titulo: "Partidos, elecciones y representación", fecha: "24 feb", hora: "19:00", modalidad: "Virtual", dimension: "Democracia", estado: "completada" },
+  { numero: 7, titulo: "Separación de poderes y contrapesos", fecha: "3 mar", hora: "19:00", modalidad: "Virtual", dimension: "Democracia", estado: "completada" },
+  { numero: 8, titulo: "Descentralización y gobiernos regionales", fecha: "10 mar", hora: "19:00", modalidad: "Virtual", dimension: "Democracia", estado: "completada" },
+  { numero: 9, titulo: "Bootcamp Lima: instituciones por dentro", fecha: "17 mar", hora: "09:00", modalidad: "Presencial", dimension: "Estado", estado: "completada" },
+  { numero: 10, titulo: "Función pública y carrera meritocrática", fecha: "24 mar", hora: "19:00", modalidad: "Virtual", dimension: "Estado", estado: "completada" },
+  { numero: 11, titulo: "Servicios públicos y ciudadanía", fecha: "31 mar", hora: "19:00", modalidad: "Virtual", dimension: "Estado", estado: "completada" },
+  { numero: 12, titulo: "Transparencia y acceso a la información", fecha: "7 abr", hora: "19:00", modalidad: "Virtual", dimension: "Estado", estado: "completada" },
+  { numero: 13, titulo: "Presupuesto público explicado", fecha: "14 abr", hora: "19:00", modalidad: "Virtual", dimension: "Economía", estado: "pendiente" },
+  { numero: 14, titulo: "Modelo económico peruano: virtudes y deudas", fecha: "21 abr", hora: "19:00", modalidad: "Virtual", dimension: "Economía", estado: "pendiente" },
+  { numero: 15, titulo: "Informalidad y desarrollo productivo", fecha: "28 abr", hora: "19:00", modalidad: "Virtual", dimension: "Economía", estado: "pendiente" },
+  { numero: 16, titulo: "Economía regional y cierre de brechas", fecha: "5 may", hora: "19:00", modalidad: "Virtual", dimension: "Economía", estado: "pendiente" },
+  { numero: 17, titulo: "Escucha activa y conversaciones difíciles", fecha: "12 may", hora: "19:00", modalidad: "Virtual", dimension: "Diálogo", estado: "pendiente" },
+  { numero: 18, titulo: "Bootcamp Arequipa: diseñando proyectos de impacto", fecha: "19 may", hora: "09:00", modalidad: "Presencial", dimension: "Diálogo", estado: "pendiente" },
+  { numero: 19, titulo: "Construcción de consensos y mediación", fecha: "26 may", hora: "19:00", modalidad: "Virtual", dimension: "Diálogo", estado: "pendiente" },
+  { numero: 20, titulo: "Vocería pública y comunicación ciudadana", fecha: "2 jun", hora: "19:00", modalidad: "Virtual", dimension: "Diálogo", estado: "pendiente" },
+  { numero: 21, titulo: "Periodismo, redes y verdad", fecha: "9 jun", hora: "19:00", modalidad: "Virtual", dimension: "Diálogo", estado: "pendiente" },
+  { numero: 22, titulo: "Vigilancia ciudadana con datos abiertos", fecha: "16 jun", hora: "19:00", modalidad: "Virtual", dimension: "Activismo", estado: "pendiente" },
+  { numero: 23, titulo: "Movilización ética y no violencia", fecha: "23 jun", hora: "19:00", modalidad: "Virtual", dimension: "Activismo", estado: "pendiente" },
+  { numero: 24, titulo: "Bootcamp San Martín: ciudadanía amazónica", fecha: "30 jun", hora: "08:30", modalidad: "Presencial", dimension: "Activismo", estado: "pendiente" },
+  { numero: 25, titulo: "Diseño de proyecto de impacto", fecha: "7 jul", hora: "19:00", modalidad: "Virtual", dimension: "Activismo", estado: "pendiente" },
+  { numero: 26, titulo: "Demo Day: presenta tu proyecto", fecha: "14 jul", hora: "09:00", modalidad: "Presencial", dimension: "Activismo", estado: "pendiente" },
 ];
 
-export const PROXIMAS_SESIONES = [
-  { numero: 13, titulo: "Periodismo, redes y verdad", fecha: "Mar 14 may", hora: "19:00", modalidad: "Virtual" as const },
-  { numero: 14, titulo: "Bootcamp San Martín: ciudadanía amazónica", fecha: "Sáb 25 may", hora: "08:30", modalidad: "Presencial" as const },
-  { numero: 15, titulo: "Diseño de proyecto final", fecha: "Mar 4 jun", hora: "19:00", modalidad: "Virtual" as const },
-];
+/** Las próximas sesiones por completar, para seguimiento rápido. */
+export const PROXIMAS_SESIONES = SESIONES.filter((s) => s.estado === "pendiente").slice(0, 5);
+
+/** Devuelve el objetivo de una dimensión por su nombre corto (= DIMENSIONS.short). */
+export function dimensionObjetivo(nombre: string): string | undefined {
+  return DIMENSIONS.find((d) => d.short === nombre)?.description;
+}
 
 export const ALIADOS = ["Delosi", "BCP", "Scotiabank", "Ferreycorp"];
 
@@ -138,3 +158,30 @@ export const ALUMNI = [
   { id: "a5", nombre: "Sofía Ataucusi Yupanqui", region: "Cusco", edicion: 3, area: "Salud comunitaria", proyecto: "Brigadas de salud rural", ods: ["ODS 3","ODS 10"], avatar: "https://api.dicebear.com/9.x/initials/svg?seed=Sofia%20Ataucusi&backgroundColor=E08E00&textColor=1A1A1A" },
   { id: "a6", nombre: "Bruno Cárdenas Polo", region: "Ucayali", edicion: 1, area: "Medio ambiente", proyecto: "Red de monitoreo de deforestación", ods: ["ODS 13","ODS 15"], avatar: "https://api.dicebear.com/9.x/initials/svg?seed=Bruno%20Cardenas&backgroundColor=C8102E&textColor=ffffff" },
 ];
+
+// Objetivos de Desarrollo Sostenible (ONU, Agenda 2030)
+export const ODS_NOMBRES: Record<string, string> = {
+  "ODS 1": "Fin de la pobreza",
+  "ODS 2": "Hambre cero",
+  "ODS 3": "Salud y bienestar",
+  "ODS 4": "Educación de calidad",
+  "ODS 5": "Igualdad de género",
+  "ODS 6": "Agua limpia y saneamiento",
+  "ODS 7": "Energía asequible y no contaminante",
+  "ODS 8": "Trabajo decente y crecimiento económico",
+  "ODS 9": "Industria, innovación e infraestructura",
+  "ODS 10": "Reducción de las desigualdades",
+  "ODS 11": "Ciudades y comunidades sostenibles",
+  "ODS 12": "Producción y consumo responsables",
+  "ODS 13": "Acción por el clima",
+  "ODS 14": "Vida submarina",
+  "ODS 15": "Vida de ecosistemas terrestres",
+  "ODS 16": "Paz, justicia e instituciones sólidas",
+  "ODS 17": "Alianzas para lograr los objetivos",
+};
+
+/** Devuelve el ODS con su nombre completo, p. ej. "ODS 16 · Paz, justicia e instituciones sólidas". */
+export function odsLabel(ods: string): string {
+  const nombre = ODS_NOMBRES[ods];
+  return nombre ? `${ods} · ${nombre}` : ods;
+}

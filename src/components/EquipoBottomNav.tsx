@@ -1,21 +1,20 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Home, LineChart, CalendarDays, UserRound, MoreHorizontal, Users2, Award, LogOut, X } from "lucide-react";
+import { LayoutGrid, AlertTriangle, FileBarChart, Award, MoreHorizontal, Users2, LogOut, X } from "lucide-react";
 
 const main = [
-  { to: "/becario", label: "Inicio", icon: Home, exact: true },
-  { to: "/becario/progreso", label: "Progreso", icon: LineChart },
-  { to: "/becario/sesiones", label: "Sesiones", icon: CalendarDays },
-  { to: "/becario/mentor", label: "Mentor", icon: UserRound },
+  { to: "/equipo", label: "Cohorte", icon: LayoutGrid, exact: true },
+  { to: "/equipo/alertas", label: "Alertas", icon: AlertTriangle },
+  { to: "/equipo/reportes", label: "Reportes", icon: FileBarChart },
+  { to: "/equipo/certificados", label: "Certificados", icon: Award },
 ];
 
 const more = [
-  { to: "/becario/alumni", label: "Red Alumni", icon: Users2 },
-  { to: "/becario/certificado", label: "Mi certificado", icon: Award },
+  { to: "/equipo/alumni", label: "Red Alumni", icon: Users2 },
   { to: "/", label: "Cerrar sesión", icon: LogOut },
 ];
 
-export function BecarioBottomNav() {
+export function EquipoBottomNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [openMore, setOpenMore] = useState(false);
   const isMoreActive = more.some((m) => path === m.to);

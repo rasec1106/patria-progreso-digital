@@ -1,7 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { LayoutGrid, Map, MessageSquare, Eye, AlertTriangle, SlidersHorizontal, X } from "lucide-react";
+import { createPortal } from "react-dom";
+import { LayoutGrid, Map, MessageSquare, Eye, SlidersHorizontal, X, SearchX } from "lucide-react";
 import { BECARIOS, REGIONES } from "@/lib/mock-data";
+import { StatusChip } from "@/components/StatusChip";
+import { EmptyState } from "@/components/EmptyState";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/equipo/")({
   component: Cohorte,
@@ -20,16 +24,16 @@ function Cohorte() {
 
   return (
     <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 sm:py-8 fade-in">
-      <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">Cohorte 2026</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Edición 4 · 600 becarios · 25 regiones</p>
-        </div>
-        <div className="flex gap-1 p-1 rounded-lg bg-muted">
-          <button onClick={() => setView("tabla")} className={`flex items-center gap-1.5 px-3 min-h-[44px] rounded-md text-sm ${view === "tabla" ? "bg-surface shadow-sm font-medium" : "text-muted-foreground"}`}><LayoutGrid className="size-4" /> <span className="hidden sm:inline">Lista</span></button>
-          <button onClick={() => setView("mapa")} className={`flex items-center gap-1.5 px-3 min-h-[44px] rounded-md text-sm ${view === "mapa" ? "bg-surface shadow-sm font-medium" : "text-muted-foreground"}`}><Map className="size-4" /> <span className="hidden sm:inline">Mapa</span></button>
-        </div>
-      </header>
+      <PageHeader
+        title="Cohorte 2026"
+        description="Edición 4 · 600 becarios · 25 regiones"
+        actions={
+          <div className="flex gap-1 p-1 rounded-lg bg-muted">
+            <button onClick={() => setView("tabla")} aria-pressed={view === "tabla"} className={`flex items-center gap-1.5 px-3 min-h-[44px] rounded-md text-sm focusable ${view === "tabla" ? "bg-surface shadow-sm font-medium" : "text-muted-foreground"}`}><LayoutGrid className="size-4" /> <span className="hidden sm:inline">Lista</span></button>
+            <button onClick={() => setView("mapa")} aria-pressed={view === "mapa"} className={`flex items-center gap-1.5 px-3 min-h-[44px] rounded-md text-sm focusable ${view === "mapa" ? "bg-surface shadow-sm font-medium" : "text-muted-foreground"}`}><Map className="size-4" /> <span className="hidden sm:inline">Mapa</span></button>
+          </div>
+        }
+      />
 
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
         <Kpi label="Becarios activos" value="587" trend="+12 vs. mes ant." trendColor="text-success" />
@@ -54,24 +58,49 @@ function Cohorte() {
 
       {/* Desktop filters */}
       <div className="card-soft p-4 mb-4 hidden lg:flex flex-wrap items-center gap-3">
-        <span className="text-xs text-muted-foreground">Filtrar:</span>
-        <select value={region} onChange={(e) => setRegion(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
-          <option>Todas</option>
-          {REGIONES.map((r) => <option key={r}>{r}</option>)}
-        </select>
-        <select value={estado} onChange={(e) => setEstado(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
-          <option>Todos</option><option>Activos</option><option>En riesgo</option>
-        </select>
-        <select className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
-          <option>Edición 4</option><option>Edición 3</option><option>Edición 2</option><option>Edición 1</option>
-        </select>
-        <span className="ml-auto text-xs text-muted-foreground">{filtered.length} resultados</span>
+        <span className="self-start text-xs text-muted-foreground">Filtrar:</span>
+        <label className="flex flex-col gap-1">
+          <span className="text-xs font-medium text-muted-foreground">Región</span>
+          <select value={region} onChange={(e) => setRegion(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
+            <option>Todas</option>
+            {REGIONES.map((r) => <option key={r}>{r}</option>)}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1">
+          <span className="text-xs font-medium text-muted-foreground">Estado</span>
+          <select value={estado} onChange={(e) => setEstado(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
+            <option>Todos</option><option>Activos</option><option>En riesgo</option>
+          </select>
+        </label>
+        <label className="flex flex-col gap-1">
+          <span className="text-xs font-medium text-muted-foreground">Edición</span>
+          <select className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
+            <option>Edición 4</option><option>Edición 3</option><option>Edición 2</option><option>Edición 1</option>
+          </select>
+        </label>
+        <span className="ml-auto self-end text-xs text-muted-foreground">{filtered.length} resultados</span>
       </div>
 
-      {view === "tabla" ? (
+      {view === "tabla" && filtered.length === 0 ? (
+        <div className="card-soft">
+          <EmptyState
+            icon={SearchX}
+            title="Sin resultados"
+            description="Ningún becario coincide con los filtros seleccionados. Prueba ampliar la región o el estado."
+            action={
+              <button
+                onClick={() => { setRegion("Todas"); setEstado("Todos"); }}
+                className="touch-target press focusable px-4 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
+              >
+                Limpiar filtros
+              </button>
+            }
+          />
+        </div>
+      ) : view === "tabla" ? (
         <>
           {/* Mobile: stacked cards */}
-          <ul className="lg:hidden space-y-3">
+          <ul className="lg:hidden space-y-3 stagger">
             {filtered.map((b) => (
               <li key={b.id} className="card-soft p-4">
                 <div className="flex items-start gap-3">
@@ -82,7 +111,7 @@ function Cohorte() {
                         <p className="font-medium leading-tight truncate">{b.nombre}</p>
                         <p className="text-xs text-muted-foreground truncate">{b.region} · Edición {b.edicion}</p>
                       </div>
-                      <EstadoChip estado={b.estado} />
+                      <StatusChip variant={b.estado as "riesgo" | "activo" | "graduado"} />
                     </div>
                     <div className="mt-3 flex items-center gap-2">
                       <div className="flex-1 h-1.5 rounded-full bg-border overflow-hidden">
@@ -90,18 +119,18 @@ function Cohorte() {
                       </div>
                       <span className="text-xs font-medium tabular-nums w-9 text-right">{b.progreso}%</span>
                     </div>
-                    <p className="mt-2 text-[11px] text-muted-foreground">Última actividad: {b.ultimaActividad}</p>
+                    <p className="mt-2 text-meta">Última actividad: {b.ultimaActividad}</p>
                     <div className="mt-3 flex gap-2">
                       <Link
                         to="/equipo/becario/$id"
                         params={{ id: b.id }}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-lg border border-border text-sm font-medium hover:border-primary"
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-lg border border-border text-sm font-medium hover:border-primary press focusable"
                       >
                         <Eye className="size-4" /> Ver perfil
                       </Link>
                       <button
-                        className="size-11 grid place-items-center rounded-lg border border-border hover:border-primary"
-                        aria-label="Dejar comentario"
+                        className="size-11 grid place-items-center rounded-lg border border-border hover:border-primary press focusable"
+                        aria-label={`Dejar comentario a ${b.nombre}`}
                       >
                         <MessageSquare className="size-4" />
                       </button>
@@ -148,12 +177,12 @@ function Cohorte() {
                     </td>
                     <td className="px-4 py-3 text-xs text-muted-foreground">{b.ultimaActividad}</td>
                     <td className="px-4 py-3">
-                      <EstadoChip estado={b.estado} />
+                      <StatusChip variant={b.estado as "riesgo" | "activo" | "graduado"} />
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex justify-end gap-1">
-                        <Link to="/equipo/becario/$id" params={{ id: b.id }} className="p-1.5 rounded hover:bg-muted" title="Ver perfil"><Eye className="size-4" /></Link>
-                        <button className="p-1.5 rounded hover:bg-muted" title="Dejar comentario"><MessageSquare className="size-4" /></button>
+                        <Link to="/equipo/becario/$id" params={{ id: b.id }} className="p-1.5 rounded hover:bg-muted focusable" title="Ver perfil" aria-label={`Ver perfil de ${b.nombre}`}><Eye className="size-4" /></Link>
+                        <button className="p-1.5 rounded hover:bg-muted focusable" title="Dejar comentario" aria-label={`Dejar comentario a ${b.nombre}`}><MessageSquare className="size-4" /></button>
                       </div>
                     </td>
                   </tr>
@@ -166,8 +195,9 @@ function Cohorte() {
         <Mapa />
       )}
 
-      {/* Filters sheet (mobile) */}
-      {filtersOpen && (
+      {/* Filters sheet (mobile) — portal a body para que `fixed` use el viewport,
+          no el contenedor con transform de la animación fade-in */}
+      {filtersOpen && createPortal(
         <div className="lg:hidden fixed inset-0 z-50 fade-in">
           <div className="absolute inset-0 bg-black/40" onClick={() => setFiltersOpen(false)} />
           <div
@@ -228,7 +258,8 @@ function Cohorte() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
@@ -239,15 +270,9 @@ function Kpi({ label, value, trend, trendColor = "text-muted-foreground" }: { la
     <div className="card-soft p-4 sm:p-5">
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="mt-1 text-2xl sm:text-3xl font-semibold tracking-tight tabular-nums">{value}</p>
-      {trend && <p className={`mt-1 text-[11px] ${trendColor}`}>{trend}</p>}
+      {trend && <p className={`mt-1 text-xs ${trendColor}`}>{trend}</p>}
     </div>
   );
-}
-
-function EstadoChip({ estado }: { estado: string }) {
-  if (estado === "riesgo") return <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full bg-warning/15 text-warning border border-warning/30 shrink-0"><AlertTriangle className="size-3" /> Riesgo</span>;
-  if (estado === "graduado") return <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-gold/15 border border-gold/30 shrink-0">Graduado</span>;
-  return <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-success/10 text-success border border-success/30 shrink-0">Activo</span>;
 }
 
 function Mapa() {
@@ -267,7 +292,7 @@ function Mapa() {
             <div key={region} className={`p-4 rounded-lg border ${color}`}>
               <p className="text-xs text-muted-foreground">{region}</p>
               <p className="mt-1 text-2xl font-semibold">{s.count}</p>
-              <p className="text-[11px] text-muted-foreground">{s.risk} en riesgo</p>
+              <p className="text-meta">{s.risk} en riesgo</p>
             </div>
           );
         })}

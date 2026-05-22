@@ -1,26 +1,24 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, LineChart, CalendarDays, UserRound, Users2, Award, LogOut } from "lucide-react";
-import { DIEGO } from "@/lib/mock-data";
+import { LayoutGrid, AlertTriangle, FileBarChart, Award, Users2, LogOut } from "lucide-react";
 
 const items = [
-  { to: "/becario", label: "Inicio", icon: Home, exact: true },
-  { to: "/becario/progreso", label: "Mi progreso", icon: LineChart },
-  { to: "/becario/sesiones", label: "Mis sesiones", icon: CalendarDays },
-  { to: "/becario/mentor", label: "Mi mentor", icon: UserRound },
-  { to: "/becario/alumni", label: "Red Alumni", icon: Users2 },
-  { to: "/becario/certificado", label: "Mi certificado", icon: Award },
+  { to: "/equipo", label: "Cohorte", icon: LayoutGrid, exact: true },
+  { to: "/equipo/alertas", label: "Alertas", icon: AlertTriangle },
+  { to: "/equipo/reportes", label: "Reportes", icon: FileBarChart },
+  { to: "/equipo/certificados", label: "Certificados", icon: Award },
+  { to: "/equipo/alumni", label: "Red Alumni", icon: Users2 },
 ];
 
-export function BecarioSidebar() {
+export function EquipoSidebar() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
     <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-border bg-sidebar h-[calc(100vh-57px)] sticky top-[57px]">
       <div className="p-5 border-b border-border">
         <div className="flex items-center gap-3">
-          <img src={DIEGO.avatar} alt={DIEGO.nombre} className="size-12 rounded-full ring-2 ring-primary/20" />
+          <img src="https://api.dicebear.com/9.x/initials/svg?seed=Madison%20Montenegro&backgroundColor=C8102E&textColor=ffffff" alt="Madison Montenegro" className="size-12 rounded-full ring-2 ring-primary/20" />
           <div className="min-w-0">
-            <p className="text-sm font-semibold leading-tight truncate">{DIEGO.nombre.split(" ").slice(0,2).join(" ")}</p>
-            <p className="text-xs text-muted-foreground truncate">{DIEGO.region}</p>
+            <p className="text-sm font-semibold leading-tight truncate">Madison M.</p>
+            <p className="text-xs text-muted-foreground truncate">Project Manager</p>
             <p className="text-xs text-primary font-medium mt-0.5">Edición 4 — 2026</p>
           </div>
         </div>

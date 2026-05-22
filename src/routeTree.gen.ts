@@ -11,12 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as BecarioRouteImport } from './routes/becario'
-import { Route as AlumniRouteImport } from './routes/alumni'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EquipoIndexRouteImport } from './routes/equipo.index'
 import { Route as BecarioIndexRouteImport } from './routes/becario.index'
 import { Route as EquipoReportesRouteImport } from './routes/equipo.reportes'
 import { Route as EquipoCertificadosRouteImport } from './routes/equipo.certificados'
+import { Route as EquipoAlumniRouteImport } from './routes/equipo.alumni'
 import { Route as EquipoAlertasRouteImport } from './routes/equipo.alertas'
 import { Route as BecarioSesionesRouteImport } from './routes/becario.sesiones'
 import { Route as BecarioProgresoRouteImport } from './routes/becario.progreso'
@@ -24,7 +24,10 @@ import { Route as BecarioOnboardingRouteImport } from './routes/becario.onboardi
 import { Route as BecarioMentorRouteImport } from './routes/becario.mentor'
 import { Route as BecarioCertificadoRouteImport } from './routes/becario.certificado'
 import { Route as BecarioBoletaSalidaRouteImport } from './routes/becario.boleta-salida'
+import { Route as BecarioAlumniRouteImport } from './routes/becario.alumni'
+import { Route as BecarioCertificadoIndexRouteImport } from './routes/becario.certificado.index'
 import { Route as EquipoBecarioIdRouteImport } from './routes/equipo.becario.$id'
+import { Route as BecarioCertificadoPreviewRouteImport } from './routes/becario.certificado.preview'
 
 const EquipoRoute = EquipoRouteImport.update({
   id: '/equipo',
@@ -34,11 +37,6 @@ const EquipoRoute = EquipoRouteImport.update({
 const BecarioRoute = BecarioRouteImport.update({
   id: '/becario',
   path: '/becario',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlumniRoute = AlumniRouteImport.update({
-  id: '/alumni',
-  path: '/alumni',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -64,6 +62,11 @@ const EquipoReportesRoute = EquipoReportesRouteImport.update({
 const EquipoCertificadosRoute = EquipoCertificadosRouteImport.update({
   id: '/certificados',
   path: '/certificados',
+  getParentRoute: () => EquipoRoute,
+} as any)
+const EquipoAlumniRoute = EquipoAlumniRouteImport.update({
+  id: '/alumni',
+  path: '/alumni',
   getParentRoute: () => EquipoRoute,
 } as any)
 const EquipoAlertasRoute = EquipoAlertasRouteImport.update({
@@ -101,72 +104,96 @@ const BecarioBoletaSalidaRoute = BecarioBoletaSalidaRouteImport.update({
   path: '/boleta-salida',
   getParentRoute: () => BecarioRoute,
 } as any)
+const BecarioAlumniRoute = BecarioAlumniRouteImport.update({
+  id: '/alumni',
+  path: '/alumni',
+  getParentRoute: () => BecarioRoute,
+} as any)
+const BecarioCertificadoIndexRoute = BecarioCertificadoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BecarioCertificadoRoute,
+} as any)
 const EquipoBecarioIdRoute = EquipoBecarioIdRouteImport.update({
   id: '/becario/$id',
   path: '/becario/$id',
   getParentRoute: () => EquipoRoute,
 } as any)
+const BecarioCertificadoPreviewRoute =
+  BecarioCertificadoPreviewRouteImport.update({
+    id: '/preview',
+    path: '/preview',
+    getParentRoute: () => BecarioCertificadoRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/alumni': typeof AlumniRoute
   '/becario': typeof BecarioRouteWithChildren
   '/equipo': typeof EquipoRouteWithChildren
+  '/becario/alumni': typeof BecarioAlumniRoute
   '/becario/boleta-salida': typeof BecarioBoletaSalidaRoute
-  '/becario/certificado': typeof BecarioCertificadoRoute
+  '/becario/certificado': typeof BecarioCertificadoRouteWithChildren
   '/becario/mentor': typeof BecarioMentorRoute
   '/becario/onboarding': typeof BecarioOnboardingRoute
   '/becario/progreso': typeof BecarioProgresoRoute
   '/becario/sesiones': typeof BecarioSesionesRoute
   '/equipo/alertas': typeof EquipoAlertasRoute
+  '/equipo/alumni': typeof EquipoAlumniRoute
   '/equipo/certificados': typeof EquipoCertificadosRoute
   '/equipo/reportes': typeof EquipoReportesRoute
   '/becario/': typeof BecarioIndexRoute
   '/equipo/': typeof EquipoIndexRoute
+  '/becario/certificado/preview': typeof BecarioCertificadoPreviewRoute
   '/equipo/becario/$id': typeof EquipoBecarioIdRoute
+  '/becario/certificado/': typeof BecarioCertificadoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/alumni': typeof AlumniRoute
+  '/becario/alumni': typeof BecarioAlumniRoute
   '/becario/boleta-salida': typeof BecarioBoletaSalidaRoute
-  '/becario/certificado': typeof BecarioCertificadoRoute
   '/becario/mentor': typeof BecarioMentorRoute
   '/becario/onboarding': typeof BecarioOnboardingRoute
   '/becario/progreso': typeof BecarioProgresoRoute
   '/becario/sesiones': typeof BecarioSesionesRoute
   '/equipo/alertas': typeof EquipoAlertasRoute
+  '/equipo/alumni': typeof EquipoAlumniRoute
   '/equipo/certificados': typeof EquipoCertificadosRoute
   '/equipo/reportes': typeof EquipoReportesRoute
   '/becario': typeof BecarioIndexRoute
   '/equipo': typeof EquipoIndexRoute
+  '/becario/certificado/preview': typeof BecarioCertificadoPreviewRoute
   '/equipo/becario/$id': typeof EquipoBecarioIdRoute
+  '/becario/certificado': typeof BecarioCertificadoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/alumni': typeof AlumniRoute
   '/becario': typeof BecarioRouteWithChildren
   '/equipo': typeof EquipoRouteWithChildren
+  '/becario/alumni': typeof BecarioAlumniRoute
   '/becario/boleta-salida': typeof BecarioBoletaSalidaRoute
-  '/becario/certificado': typeof BecarioCertificadoRoute
+  '/becario/certificado': typeof BecarioCertificadoRouteWithChildren
   '/becario/mentor': typeof BecarioMentorRoute
   '/becario/onboarding': typeof BecarioOnboardingRoute
   '/becario/progreso': typeof BecarioProgresoRoute
   '/becario/sesiones': typeof BecarioSesionesRoute
   '/equipo/alertas': typeof EquipoAlertasRoute
+  '/equipo/alumni': typeof EquipoAlumniRoute
   '/equipo/certificados': typeof EquipoCertificadosRoute
   '/equipo/reportes': typeof EquipoReportesRoute
   '/becario/': typeof BecarioIndexRoute
   '/equipo/': typeof EquipoIndexRoute
+  '/becario/certificado/preview': typeof BecarioCertificadoPreviewRoute
   '/equipo/becario/$id': typeof EquipoBecarioIdRoute
+  '/becario/certificado/': typeof BecarioCertificadoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/alumni'
     | '/becario'
     | '/equipo'
+    | '/becario/alumni'
     | '/becario/boleta-salida'
     | '/becario/certificado'
     | '/becario/mentor'
@@ -174,33 +201,38 @@ export interface FileRouteTypes {
     | '/becario/progreso'
     | '/becario/sesiones'
     | '/equipo/alertas'
+    | '/equipo/alumni'
     | '/equipo/certificados'
     | '/equipo/reportes'
     | '/becario/'
     | '/equipo/'
+    | '/becario/certificado/preview'
     | '/equipo/becario/$id'
+    | '/becario/certificado/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/alumni'
+    | '/becario/alumni'
     | '/becario/boleta-salida'
-    | '/becario/certificado'
     | '/becario/mentor'
     | '/becario/onboarding'
     | '/becario/progreso'
     | '/becario/sesiones'
     | '/equipo/alertas'
+    | '/equipo/alumni'
     | '/equipo/certificados'
     | '/equipo/reportes'
     | '/becario'
     | '/equipo'
+    | '/becario/certificado/preview'
     | '/equipo/becario/$id'
+    | '/becario/certificado'
   id:
     | '__root__'
     | '/'
-    | '/alumni'
     | '/becario'
     | '/equipo'
+    | '/becario/alumni'
     | '/becario/boleta-salida'
     | '/becario/certificado'
     | '/becario/mentor'
@@ -208,16 +240,18 @@ export interface FileRouteTypes {
     | '/becario/progreso'
     | '/becario/sesiones'
     | '/equipo/alertas'
+    | '/equipo/alumni'
     | '/equipo/certificados'
     | '/equipo/reportes'
     | '/becario/'
     | '/equipo/'
+    | '/becario/certificado/preview'
     | '/equipo/becario/$id'
+    | '/becario/certificado/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AlumniRoute: typeof AlumniRoute
   BecarioRoute: typeof BecarioRouteWithChildren
   EquipoRoute: typeof EquipoRouteWithChildren
 }
@@ -236,13 +270,6 @@ declare module '@tanstack/react-router' {
       path: '/becario'
       fullPath: '/becario'
       preLoaderRoute: typeof BecarioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/alumni': {
-      id: '/alumni'
-      path: '/alumni'
-      fullPath: '/alumni'
-      preLoaderRoute: typeof AlumniRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -278,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/certificados'
       fullPath: '/equipo/certificados'
       preLoaderRoute: typeof EquipoCertificadosRouteImport
+      parentRoute: typeof EquipoRoute
+    }
+    '/equipo/alumni': {
+      id: '/equipo/alumni'
+      path: '/alumni'
+      fullPath: '/equipo/alumni'
+      preLoaderRoute: typeof EquipoAlumniRouteImport
       parentRoute: typeof EquipoRoute
     }
     '/equipo/alertas': {
@@ -329,6 +363,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BecarioBoletaSalidaRouteImport
       parentRoute: typeof BecarioRoute
     }
+    '/becario/alumni': {
+      id: '/becario/alumni'
+      path: '/alumni'
+      fullPath: '/becario/alumni'
+      preLoaderRoute: typeof BecarioAlumniRouteImport
+      parentRoute: typeof BecarioRoute
+    }
+    '/becario/certificado/': {
+      id: '/becario/certificado/'
+      path: '/'
+      fullPath: '/becario/certificado/'
+      preLoaderRoute: typeof BecarioCertificadoIndexRouteImport
+      parentRoute: typeof BecarioCertificadoRoute
+    }
     '/equipo/becario/$id': {
       id: '/equipo/becario/$id'
       path: '/becario/$id'
@@ -336,12 +384,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquipoBecarioIdRouteImport
       parentRoute: typeof EquipoRoute
     }
+    '/becario/certificado/preview': {
+      id: '/becario/certificado/preview'
+      path: '/preview'
+      fullPath: '/becario/certificado/preview'
+      preLoaderRoute: typeof BecarioCertificadoPreviewRouteImport
+      parentRoute: typeof BecarioCertificadoRoute
+    }
   }
 }
 
+interface BecarioCertificadoRouteChildren {
+  BecarioCertificadoPreviewRoute: typeof BecarioCertificadoPreviewRoute
+  BecarioCertificadoIndexRoute: typeof BecarioCertificadoIndexRoute
+}
+
+const BecarioCertificadoRouteChildren: BecarioCertificadoRouteChildren = {
+  BecarioCertificadoPreviewRoute: BecarioCertificadoPreviewRoute,
+  BecarioCertificadoIndexRoute: BecarioCertificadoIndexRoute,
+}
+
+const BecarioCertificadoRouteWithChildren =
+  BecarioCertificadoRoute._addFileChildren(BecarioCertificadoRouteChildren)
+
 interface BecarioRouteChildren {
+  BecarioAlumniRoute: typeof BecarioAlumniRoute
   BecarioBoletaSalidaRoute: typeof BecarioBoletaSalidaRoute
-  BecarioCertificadoRoute: typeof BecarioCertificadoRoute
+  BecarioCertificadoRoute: typeof BecarioCertificadoRouteWithChildren
   BecarioMentorRoute: typeof BecarioMentorRoute
   BecarioOnboardingRoute: typeof BecarioOnboardingRoute
   BecarioProgresoRoute: typeof BecarioProgresoRoute
@@ -350,8 +419,9 @@ interface BecarioRouteChildren {
 }
 
 const BecarioRouteChildren: BecarioRouteChildren = {
+  BecarioAlumniRoute: BecarioAlumniRoute,
   BecarioBoletaSalidaRoute: BecarioBoletaSalidaRoute,
-  BecarioCertificadoRoute: BecarioCertificadoRoute,
+  BecarioCertificadoRoute: BecarioCertificadoRouteWithChildren,
   BecarioMentorRoute: BecarioMentorRoute,
   BecarioOnboardingRoute: BecarioOnboardingRoute,
   BecarioProgresoRoute: BecarioProgresoRoute,
@@ -364,6 +434,7 @@ const BecarioRouteWithChildren =
 
 interface EquipoRouteChildren {
   EquipoAlertasRoute: typeof EquipoAlertasRoute
+  EquipoAlumniRoute: typeof EquipoAlumniRoute
   EquipoCertificadosRoute: typeof EquipoCertificadosRoute
   EquipoReportesRoute: typeof EquipoReportesRoute
   EquipoIndexRoute: typeof EquipoIndexRoute
@@ -372,6 +443,7 @@ interface EquipoRouteChildren {
 
 const EquipoRouteChildren: EquipoRouteChildren = {
   EquipoAlertasRoute: EquipoAlertasRoute,
+  EquipoAlumniRoute: EquipoAlumniRoute,
   EquipoCertificadosRoute: EquipoCertificadosRoute,
   EquipoReportesRoute: EquipoReportesRoute,
   EquipoIndexRoute: EquipoIndexRoute,
@@ -383,10 +455,19 @@ const EquipoRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AlumniRoute: AlumniRoute,
   BecarioRoute: BecarioRouteWithChildren,
   EquipoRoute: EquipoRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

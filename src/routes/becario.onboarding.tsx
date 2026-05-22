@@ -25,14 +25,14 @@ function Onboarding() {
 
   if (done) {
     return (
-      <div className="min-h-screen grid place-items-center px-6 fade-in">
+      <div className="min-h-screen grid place-items-center px-4 sm:px-6 fade-in">
         <div className="text-center max-w-md">
           <div className="size-20 mx-auto rounded-full bg-success/10 grid place-items-center text-success">
             <Check className="size-10" />
           </div>
           <h1 className="mt-6 text-3xl font-semibold tracking-tight">Listo, Diego.</h1>
           <p className="mt-3 text-muted-foreground font-serif">"Esto no es un examen. Es la foto de dónde estás hoy para que en 6 meses veamos juntos cuánto creciste."</p>
-          <button onClick={() => navigate({ to: "/becario" })} className="mt-8 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90">
+          <button onClick={() => navigate({ to: "/becario" })} className="mt-8 touch-target gap-2 px-5 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 press focusable">
             Ir a mi dashboard <ArrowRight className="size-4" />
           </button>
         </div>
@@ -42,28 +42,30 @@ function Onboarding() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-2xl mx-auto px-6 py-10">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <header className="mb-8">
-          <p className="text-sm text-primary font-medium">Boleta de entrada</p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight font-serif">
+          <p className="text-eyebrow text-primary">Boleta de entrada</p>
+          <h1 className="mt-1.5 text-xl sm:text-2xl font-semibold tracking-tight font-serif">
             Esto no es un examen. Es la foto de dónde estás hoy para que en 6 meses veamos juntos cuánto creciste.
           </h1>
-          <div className="mt-6 flex items-center gap-2">
+          <div className="mt-6 flex items-center gap-1.5 sm:gap-2">
             {steps.map((s, i) => (
               <div key={s} className="flex-1">
                 <div className={`h-1.5 rounded-full ${i <= step ? "bg-primary" : "bg-border"}`} />
-                <p className={`mt-2 text-[11px] ${i === step ? "text-primary font-medium" : "text-muted-foreground"}`}>{i+1}. {s}</p>
+                <p className={`mt-2 text-[11px] hidden sm:block ${i === step ? "text-primary font-medium" : "text-muted-foreground"}`}>{i+1}. {s}</p>
               </div>
             ))}
           </div>
+          {/* En móvil, un solo indicador textual en lugar de 5 etiquetas amontonadas */}
+          <p className="mt-2 text-meta sm:hidden">Paso {step+1} de {steps.length}: {steps[step]}</p>
         </header>
 
-        <div className="card-soft p-6 lg:p-8 fade-in" key={step}>
+        <div className="card-soft p-5 sm:p-6 lg:p-8 fade-in" key={step}>
           {step === 0 && (
             <div className="space-y-4">
               <h2 className="text-xl font-semibold">Cuéntanos quién eres</h2>
               <Field label="Nombre completo" defaultValue="Diego Quispe Tuanama" />
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Field label="Edad" type="number" defaultValue="22" />
                 <Select label="Región" options={REGIONES} defaultValue="San Martín" />
               </div>
@@ -85,7 +87,7 @@ function Onboarding() {
                 value={motivacion}
                 onChange={(e) => setMotivacion(e.target.value.slice(0, 500))}
                 rows={7}
-                className="mt-4 w-full p-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none"
+                className="mt-4 w-full p-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none focusable"
                 placeholder="Escribe lo que sientes, no lo que crees que queremos leer."
               />
               <p className="text-right text-xs text-muted-foreground mt-1">{motivacion.length}/500</p>
@@ -108,10 +110,10 @@ function Onboarding() {
                           <p className="text-xs text-muted-foreground">{d.description}</p>
                         </div>
                       </div>
-                      <div className="mt-3 ml-12 flex gap-2">
+                      <div className="mt-3 ml-12 flex gap-1.5 sm:gap-2">
                         {[1,2,3,4,5].map((n) => (
                           <button key={n} onClick={() => setScores((s) => ({ ...s, [d.key]: n }))}
-                            className={`flex-1 h-10 rounded-lg border text-sm font-medium transition-colors ${scores[d.key] === n ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/40"}`}>
+                            className={`flex-1 min-h-[44px] rounded-lg border text-sm font-medium transition-colors press focusable ${scores[d.key] === n ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/40"}`}>
                             {n}
                           </button>
                         ))}
@@ -131,10 +133,10 @@ function Onboarding() {
                 {SOFT_SKILLS.map((s) => (
                   <div key={s}>
                     <p className="text-sm font-medium">{s}</p>
-                    <div className="mt-2 flex gap-2">
+                    <div className="mt-2 flex gap-1.5 sm:gap-2">
                       {[1,2,3,4,5].map((n) => (
                         <button key={n} onClick={() => setSoft((x) => ({ ...x, [s]: n }))}
-                          className={`flex-1 h-10 rounded-lg border text-sm font-medium ${soft[s] === n ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/40"}`}>
+                          className={`flex-1 min-h-[44px] rounded-lg border text-sm font-medium press focusable ${soft[s] === n ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/40"}`}>
                           {n}
                         </button>
                       ))}
@@ -162,22 +164,22 @@ function Onboarding() {
                 ))}
               </div>
               <div className="mt-6">
-                <label className="text-sm font-medium">Firma digital (escribe tu nombre completo)</label>
-                <input className="mt-2 w-full p-3 rounded-lg border border-border bg-surface text-sm font-serif italic focus:border-primary outline-none" defaultValue="Diego Quispe Tuanama" />
+                <label htmlFor="firma" className="text-sm font-medium">Firma digital (escribe tu nombre completo)</label>
+                <input id="firma" className="mt-2 w-full min-h-[44px] px-3 rounded-lg border border-border bg-surface text-sm font-serif italic focus:border-primary outline-none focusable" defaultValue="Diego Quispe Tuanama" />
               </div>
             </div>
           )}
 
           <div className="mt-8 flex items-center justify-between">
-            <button onClick={back} disabled={step === 0} className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground disabled:opacity-30">
+            <button onClick={back} disabled={step === 0} className="touch-target gap-1.5 px-2 text-sm text-muted-foreground hover:text-foreground disabled:opacity-30 press focusable">
               <ArrowLeft className="size-4" /> Atrás
             </button>
             {step < steps.length - 1 ? (
-              <button onClick={next} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90">
+              <button onClick={next} className="touch-target gap-2 px-5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 press focusable">
                 Siguiente <ArrowRight className="size-4" />
               </button>
             ) : (
-              <button onClick={finish} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-success text-success-foreground text-sm font-medium hover:opacity-90">
+              <button onClick={finish} className="touch-target gap-2 px-5 rounded-lg bg-success text-success-foreground text-sm font-medium hover:opacity-90 press focusable">
                 Enviar boleta <Check className="size-4" />
               </button>
             )}
@@ -190,19 +192,19 @@ function Onboarding() {
 
 function Field({ label, ...rest }: any) {
   return (
-    <div>
-      <label className="text-sm font-medium">{label}</label>
-      <input {...rest} className="mt-1.5 w-full p-2.5 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none" />
-    </div>
+    <label className="block">
+      <span className="text-sm font-medium">{label}</span>
+      <input {...rest} className="mt-1.5 w-full min-h-[44px] px-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none focusable" />
+    </label>
   );
 }
 function Select({ label, options, defaultValue }: { label: string; options: string[]; defaultValue?: string }) {
   return (
-    <div>
-      <label className="text-sm font-medium">{label}</label>
-      <select defaultValue={defaultValue} className="mt-1.5 w-full p-2.5 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none">
+    <label className="block">
+      <span className="text-sm font-medium">{label}</span>
+      <select defaultValue={defaultValue} className="mt-1.5 w-full min-h-[44px] px-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none focusable">
         {options.map((o) => <option key={o}>{o}</option>)}
       </select>
-    </div>
+    </label>
   );
 }

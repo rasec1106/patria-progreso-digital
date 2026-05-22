@@ -1,5 +1,6 @@
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import { DIMENSIONS } from "@/lib/mock-data";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type Props = {
   entrada: Record<string, number>;
@@ -11,13 +12,15 @@ type Props = {
 };
 
 export function RadarCompare({ entrada, actual, height = 320, showEntrada = true, labelEntrada = "Boleta de entrada", labelActual = "Hoy" }: Props) {
+  const isMobile = useIsMobile();
+  const h = isMobile ? Math.min(height, 240) : height;
   const data = DIMENSIONS.map((d) => ({
     dimension: d.short,
     entrada: entrada[d.key] ?? 0,
     actual: actual[d.key] ?? 0,
   }));
   return (
-    <ResponsiveContainer width="100%" height={height} minHeight={260}>
+    <ResponsiveContainer width="100%" height={h} minHeight={220}>
       <RadarChart data={data} outerRadius="72%">
         <PolarGrid stroke="var(--color-border)" />
         <PolarAngleAxis dataKey="dimension" tick={{ fill: "var(--color-foreground)", fontSize: 11 }} />
