@@ -48,10 +48,10 @@ function BecarioHome() {
       </section>
 
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
-        <section className="card-soft p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold flex items-center gap-2"><MessageSquareQuote className="size-4 text-primary" /> Feedback reciente</h3>
-            <span className="text-xs text-muted-foreground">{FEEDBACK_DIEGO.length} comentarios</span>
+        <section className="card-soft p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <h3 className="font-semibold flex items-center gap-2 min-w-0"><MessageSquareQuote className="size-4 text-primary shrink-0" /> Feedback reciente</h3>
+            <span className="text-xs text-muted-foreground shrink-0 whitespace-nowrap">{FEEDBACK_DIEGO.length} comentarios</span>
           </div>
           {FEEDBACK_DIEGO.length === 0 ? (
             <EmptyState
@@ -81,7 +81,7 @@ function BecarioHome() {
           )}
         </section>
 
-        <section className="card-soft p-6">
+        <section className="card-soft p-5 sm:p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold flex items-center gap-2"><CalendarDays className="size-4 text-primary" /> Próximas sesiones</h3>
           </div>
@@ -95,15 +95,17 @@ function BecarioHome() {
           ) : (
             <ul className="space-y-3">
               {PROXIMAS_SESIONES.map((s) => (
-                <li key={s.numero} className="flex items-center gap-4 p-3 rounded-lg border border-border hover:border-primary/40 transition-colors">
-                  <div className="size-12 rounded-lg bg-muted grid place-items-center text-center shrink-0">
+                <li key={s.numero} className="flex items-start gap-3 p-3 rounded-lg border border-border hover:border-primary/40 transition-colors">
+                  <div className="size-11 sm:size-12 rounded-lg bg-muted grid place-items-center text-center shrink-0">
                     <Calendar className="size-4 text-primary" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">Sesión {s.numero}: {s.titulo}</p>
-                    <p className="text-meta">{s.fecha} · {s.hora}</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm font-medium">Sesión {s.numero}: {s.titulo}</p>
+                      <StatusChip variant={s.modalidad === "Presencial" ? "presencial" : "virtual"} className="mt-0.5" />
+                    </div>
+                    <p className="text-meta mt-0.5">{s.fecha} · {s.hora}</p>
                   </div>
-                  <StatusChip variant={s.modalidad === "Presencial" ? "presencial" : "virtual"} />
                 </li>
               ))}
             </ul>
@@ -118,7 +120,7 @@ function BecarioHome() {
         <Stat label="Mentorías recibidas" value="6" />
       </section>
 
-      <section className="card-soft p-6 lg:p-8 patria-gradient text-primary-foreground">
+      <section className="rounded-2xl shadow-lg p-6 lg:p-8 patria-gradient text-primary-foreground">
         <p className="text-sm opacity-90">Tu camino</p>
         <h3 className="mt-1 text-2xl font-semibold">Faltan 14 semanas para tu graduación.</h3>
         <p className="mt-2 max-w-xl opacity-95 font-serif">Tu mentora está acá si necesitas conversar. No tienes que tener todo claro — solo dar el siguiente paso.</p>
