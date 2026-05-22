@@ -11,7 +11,7 @@ export const Route = createFileRoute("/becario/progreso")({
 });
 
 function Progreso() {
-  const [open, setOpen] = useState<string | null>("dialogo");
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-6 sm:py-8 max-w-[1100px] mx-auto fade-in">

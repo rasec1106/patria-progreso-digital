@@ -14,7 +14,7 @@ const items = [
 export function BecarioSidebar() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
-    <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-border bg-sidebar h-screen sticky top-0">
+    <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-border bg-sidebar h-[calc(100vh-57px)] sticky top-[57px]">
       <div className="p-5 border-b border-border">
         <div className="flex items-center gap-3">
           <img src={DIEGO.avatar} alt={DIEGO.nombre} className="size-12 rounded-full ring-2 ring-primary/20" />
