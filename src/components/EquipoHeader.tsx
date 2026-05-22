@@ -1,17 +1,8 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { LayoutGrid, AlertTriangle, FileBarChart, Award, Users2, Bell, Search, X } from "lucide-react";
-
-const tabs = [
-  { to: "/equipo", label: "Cohorte", icon: LayoutGrid, exact: true },
-  { to: "/equipo/alertas", label: "Alertas", icon: AlertTriangle },
-  { to: "/equipo/reportes", label: "Reportes", icon: FileBarChart },
-  { to: "/equipo/certificados", label: "Certificados", icon: Award },
-  { to: "/equipo/alumni", label: "Red Alumni", icon: Users2 },
-];
+import { Bell, Search, X } from "lucide-react";
 
 export function EquipoHeader() {
-  const path = useRouterState({ select: (s) => s.location.pathname });
   const [searchOpen, setSearchOpen] = useState(false);
   return (
     <header className="border-b border-border bg-surface sticky top-0 z-30">
@@ -60,18 +51,6 @@ export function EquipoHeader() {
           </div>
         </div>
       )}
-
-      <nav className="hidden lg:flex max-w-[1400px] mx-auto px-4 sm:px-6 gap-1 overflow-x-auto">
-        {tabs.map((t) => {
-          const active = t.exact ? path === t.to : path.startsWith(t.to);
-          const Icon = t.icon;
-          return (
-            <Link key={t.to} to={t.to} className={`flex items-center gap-2 px-4 py-3 text-sm border-b-2 transition-colors whitespace-nowrap focusable ${active ? "border-primary text-primary font-medium" : "border-transparent text-muted-foreground hover:text-foreground"}`}>
-              <Icon className="size-4" /> {t.label}
-            </Link>
-          );
-        })}
-      </nav>
     </header>
   );
 }

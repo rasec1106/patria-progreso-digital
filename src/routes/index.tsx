@@ -40,23 +40,23 @@ function Landing() {
 
           <div className="mt-10">
             <div className="grid sm:grid-cols-2 gap-4 stagger">
-              <Link to="/becario" className="group card-soft p-5 hover:border-primary transition-all press focusable">
+              <Link to="/becario" className="group card-soft p-5 flex flex-col hover:border-primary transition-all press focusable">
                 <div className="size-10 rounded-lg bg-primary/10 text-primary grid place-items-center mb-3">
                   <GraduationCap className="size-5" />
                 </div>
                 <p className="font-semibold">Soy becario</p>
                 <p className="text-xs text-muted-foreground mt-1">Veo mi progreso, recibo feedback y descargo mi certificado.</p>
-                <span className="mt-3 inline-flex items-center text-sm text-primary font-medium gap-1 group-hover:gap-2 transition-all">
+                <span className="mt-auto pt-3 inline-flex items-center text-sm text-primary font-medium gap-1 group-hover:gap-2 transition-all">
                   Entrar como Diego <ArrowRight className="size-4" />
                 </span>
               </Link>
-              <Link to="/equipo" className="group card-soft p-5 hover:border-primary transition-all press focusable">
+              <Link to="/equipo" className="group card-soft p-5 flex flex-col hover:border-primary transition-all press focusable">
                 <div className="size-10 rounded-lg bg-primary/10 text-primary grid place-items-center mb-3">
                   <ShieldCheck className="size-5" />
                 </div>
                 <p className="font-semibold">Soy del equipo Patria C</p>
                 <p className="text-xs text-muted-foreground mt-1">Gestiono cohortes, identifico riesgo y genero reportes.</p>
-                <span className="mt-3 inline-flex items-center text-sm text-primary font-medium gap-1 group-hover:gap-2 transition-all">
+                <span className="mt-auto pt-3 inline-flex items-center text-sm text-primary font-medium gap-1 group-hover:gap-2 transition-all">
                   Entrar como Madison <ArrowRight className="size-4" />
                 </span>
               </Link>
