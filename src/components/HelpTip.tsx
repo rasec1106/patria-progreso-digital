@@ -17,7 +17,7 @@ type Props = {
 /**
  * Botón de ayuda (?) con popover. Se abre al hacer clic y se cierra al clicar
  * fuera o presionar Escape. Patrón compartido por el filtro ODS de la Red Alumni
- * y los bloques de "Mis sesiones".
+ * y las dimensiones de "Mis sesiones".
  */
 export function HelpTip({ title, children, label = "Más información", align = "left", className }: Props) {
   const [open, setOpen] = useState(false);

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { LayoutGrid, Map, MessageSquare, Eye, SlidersHorizontal, X, SearchX } from "lucide-react";
 import { BECARIOS, REGIONES } from "@/lib/mock-data";
 import { StatusChip } from "@/components/StatusChip";
@@ -57,18 +58,27 @@ function Cohorte() {
 
       {/* Desktop filters */}
       <div className="card-soft p-4 mb-4 hidden lg:flex flex-wrap items-center gap-3">
-        <span className="text-xs text-muted-foreground">Filtrar:</span>
-        <select value={region} onChange={(e) => setRegion(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
-          <option>Todas</option>
-          {REGIONES.map((r) => <option key={r}>{r}</option>)}
-        </select>
-        <select value={estado} onChange={(e) => setEstado(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
-          <option>Todos</option><option>Activos</option><option>En riesgo</option>
-        </select>
-        <select className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
-          <option>Edición 4</option><option>Edición 3</option><option>Edición 2</option><option>Edición 1</option>
-        </select>
-        <span className="ml-auto text-xs text-muted-foreground">{filtered.length} resultados</span>
+        <span className="self-start text-xs text-muted-foreground">Filtrar:</span>
+        <label className="flex flex-col gap-1">
+          <span className="text-xs font-medium text-muted-foreground">Región</span>
+          <select value={region} onChange={(e) => setRegion(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
+            <option>Todas</option>
+            {REGIONES.map((r) => <option key={r}>{r}</option>)}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1">
+          <span className="text-xs font-medium text-muted-foreground">Estado</span>
+          <select value={estado} onChange={(e) => setEstado(e.target.value)} className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
+            <option>Todos</option><option>Activos</option><option>En riesgo</option>
+          </select>
+        </label>
+        <label className="flex flex-col gap-1">
+          <span className="text-xs font-medium text-muted-foreground">Edición</span>
+          <select className="text-sm px-3 py-1.5 rounded-md border border-border bg-surface">
+            <option>Edición 4</option><option>Edición 3</option><option>Edición 2</option><option>Edición 1</option>
+          </select>
+        </label>
+        <span className="ml-auto self-end text-xs text-muted-foreground">{filtered.length} resultados</span>
       </div>
 
       {view === "tabla" && filtered.length === 0 ? (
@@ -185,8 +195,9 @@ function Cohorte() {
         <Mapa />
       )}
 
-      {/* Filters sheet (mobile) */}
-      {filtersOpen && (
+      {/* Filters sheet (mobile) — portal a body para que `fixed` use el viewport,
+          no el contenedor con transform de la animación fade-in */}
+      {filtersOpen && createPortal(
         <div className="lg:hidden fixed inset-0 z-50 fade-in">
           <div className="absolute inset-0 bg-black/40" onClick={() => setFiltersOpen(false)} />
           <div
@@ -247,7 +258,8 @@ function Cohorte() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

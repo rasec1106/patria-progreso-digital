@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CalendarDays, Calendar, CalendarClock, ChevronDown } from "lucide-react";
-import { SESIONES, PROXIMAS_SESIONES, bloqueObjetivo, type Sesion } from "@/lib/mock-data";
+import { SESIONES, PROXIMAS_SESIONES, dimensionObjetivo, type Sesion } from "@/lib/mock-data";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
 import { EmptyState } from "@/components/EmptyState";
@@ -10,21 +10,21 @@ export const Route = createFileRoute("/becario/sesiones")({
   component: Sesiones,
 });
 
-// Agrupa las sesiones por bloque conservando el orden en que aparecen.
-function agruparPorBloque(sesiones: Sesion[]) {
+// Agrupa las sesiones por dimensión conservando el orden en que aparecen.
+function agruparPorDimension(sesiones: Sesion[]) {
   return sesiones.reduce<{ nombre: string; sesiones: Sesion[] }[]>((acc, s) => {
-    const grupo = acc.find((g) => g.nombre === s.bloque);
+    const grupo = acc.find((g) => g.nombre === s.dimension);
     if (grupo) grupo.sesiones.push(s);
-    else acc.push({ nombre: s.bloque, sesiones: [s] });
+    else acc.push({ nombre: s.dimension, sesiones: [s] });
     return acc;
   }, []);
 }
 
 function Sesiones() {
   const proximas = PROXIMAS_SESIONES.slice(0, 5);
-  const bloques = agruparPorBloque(SESIONES);
-  // Abre por defecto el bloque de la próxima sesión (donde está parado el becario).
-  const [open, setOpen] = useState<string | null>(proximas[0]?.bloque ?? bloques[0]?.nombre ?? null);
+  const dimensiones = agruparPorDimension(SESIONES);
+  // Abre por defecto la dimensión de la próxima sesión (donde está parado el becario).
+  const [open, setOpen] = useState<string | null>(proximas[0]?.dimension ?? dimensiones[0]?.nombre ?? null);
 
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-6 sm:py-8 max-w-[1100px] mx-auto fade-in">
@@ -59,7 +59,7 @@ function Sesiones() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium truncate">Sesión {s.numero}: {s.titulo}</p>
-                      <p className="text-meta mt-0.5">{s.fecha} · {s.hora} · Bloque {s.bloque}</p>
+                      <p className="text-meta mt-0.5">{s.fecha} · {s.hora} · Dimensión {s.dimension}</p>
                     </div>
                     <StatusChip variant={s.modalidad === "Presencial" ? "presencial" : "virtual"} />
                   </li>
@@ -68,17 +68,17 @@ function Sesiones() {
             </section>
           )}
 
-          {/* Todas las sesiones agrupadas por bloque (dropdown) */}
+          {/* Todas las sesiones agrupadas por dimensión (dropdown) */}
           <section>
             <div className="flex items-center gap-2 mb-3">
               <CalendarDays className="size-4 text-primary" />
-              <h2 className="font-semibold">Sesiones por bloque</h2>
+              <h2 className="font-semibold">Sesiones por dimensión</h2>
             </div>
             <div className="space-y-3">
-              {bloques.map((b) => {
+              {dimensiones.map((b) => {
                 const isOpen = open === b.nombre;
                 const completadas = b.sesiones.filter((s) => s.estado === "completada").length;
-                const objetivo = bloqueObjetivo(b.nombre);
+                const objetivo = dimensionObjetivo(b.nombre);
                 return (
                   <div key={b.nombre} className="card-soft overflow-hidden">
                     <button
@@ -87,7 +87,7 @@ function Sesiones() {
                       className="w-full p-4 sm:p-5 flex items-center gap-3 sm:gap-4 text-left hover:bg-muted/30 transition-colors focusable"
                     >
                       <div className="flex-1 min-w-0">
-                        <p className="font-medium">Bloque {b.nombre}</p>
+                        <p className="font-medium">Dimensión {b.nombre}</p>
                         {objetivo && <p className="text-meta mt-0.5">{objetivo}</p>}
                       </div>
                       <div className="text-right shrink-0">
