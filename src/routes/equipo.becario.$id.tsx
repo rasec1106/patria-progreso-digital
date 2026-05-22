@@ -13,7 +13,7 @@ function BecarioDetalle() {
   if (!b) throw notFound();
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-8 fade-in">
+    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 fade-in">
       <Link to="/equipo" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-4">
         <ArrowLeft className="size-4" /> Volver a cohorte
       </Link>
@@ -33,9 +33,11 @@ function BecarioDetalle() {
       </header>
 
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6">
-        <section className="card-soft p-6">
+        <section className="card-soft p-5 sm:p-6">
           <h2 className="font-semibold mb-3">Boletas comparadas</h2>
-          <RadarCompare entrada={b.entrada} actual={b.actual} height={340} />
+          <div className="-mx-2 sm:mx-0">
+            <RadarCompare entrada={b.entrada} actual={b.actual} height={300} />
+          </div>
           <div className="mt-4 grid grid-cols-2 gap-3">
             {DIMENSIONS.map((d) => (
               <div key={d.key} className="flex items-center justify-between text-sm border-b border-border py-2">
