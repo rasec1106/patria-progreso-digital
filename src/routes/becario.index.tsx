@@ -13,7 +13,7 @@ function BecarioHome() {
     .sort((a,b) => b.delta - a.delta)[0];
 
   return (
-    <div className="px-6 lg:px-10 py-8 max-w-[1100px] mx-auto fade-in">
+    <div className="px-4 sm:px-6 lg:px-10 py-6 sm:py-8 max-w-[1100px] mx-auto fade-in">
       <header className="mb-8">
         <p className="text-sm text-muted-foreground">Edición 4 · Semana {DIEGO.semana} de 26</p>
         <h1 className="mt-1 text-3xl lg:text-4xl font-semibold tracking-tight">
@@ -22,10 +22,10 @@ function BecarioHome() {
         <p className="mt-2 text-muted-foreground">Vas bien. Esto recién empieza.</p>
       </header>
 
-      <section className="card-soft p-6 mb-6">
+      <section className="card-soft p-5 sm:p-6 mb-6">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-6 items-center">
-          <div>
-            <RadarCompare entrada={DIEGO.entrada} actual={DIEGO.actual} height={340} />
+          <div className="-mx-2 sm:mx-0">
+            <RadarCompare entrada={DIEGO.entrada} actual={DIEGO.actual} height={280} />
           </div>
           <div>
             <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-success/10 text-success">

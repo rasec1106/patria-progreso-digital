@@ -17,10 +17,10 @@ export function RadarCompare({ entrada, actual, height = 320, showEntrada = true
     actual: actual[d.key] ?? 0,
   }));
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <RadarChart data={data} outerRadius="78%">
+    <ResponsiveContainer width="100%" height={height} minHeight={260}>
+      <RadarChart data={data} outerRadius="72%">
         <PolarGrid stroke="var(--color-border)" />
-        <PolarAngleAxis dataKey="dimension" tick={{ fill: "var(--color-foreground)", fontSize: 12 }} />
+        <PolarAngleAxis dataKey="dimension" tick={{ fill: "var(--color-foreground)", fontSize: 11 }} />
         <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fill: "var(--color-muted-foreground)", fontSize: 10 }} />
         {showEntrada && (
           <Radar name={labelEntrada} dataKey="entrada" stroke="var(--color-muted-foreground)" fill="var(--color-muted-foreground)" fillOpacity={0.08} strokeDasharray="4 4" />
