@@ -1,6 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, LineChart, CalendarDays, UserRound, Users2, Award, LogOut } from "lucide-react";
-import { DIEGO } from "@/lib/mock-data";
 
 const items = [
   { to: "/becario", label: "Inicio", icon: Home, exact: true },
@@ -15,17 +14,7 @@ export function BecarioSidebar() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
     <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-border bg-sidebar h-[calc(100vh-57px)] sticky top-[57px]">
-      <div className="p-5 border-b border-border">
-        <div className="flex items-center gap-3">
-          <img src={DIEGO.avatar} alt={DIEGO.nombre} className="size-12 rounded-full ring-2 ring-primary/20" />
-          <div className="min-w-0">
-            <p className="text-sm font-semibold leading-tight truncate">{DIEGO.nombre.split(" ").slice(0,2).join(" ")}</p>
-            <p className="text-xs text-muted-foreground truncate">{DIEGO.region}</p>
-            <p className="text-xs text-primary font-medium mt-0.5">Edición 4 — 2026</p>
-          </div>
-        </div>
-      </div>
-      <nav className="flex-1 p-3 space-y-1">
+      <nav className="flex-1 p-3 space-y-1 mt-2">
         {items.map((it) => {
           const active = it.exact ? path === it.to : path.startsWith(it.to);
           const Icon = it.icon;
