@@ -19,8 +19,8 @@ function Salida() {
     <div className="min-h-screen bg-background">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-32 sm:pb-10 fade-in">
         <header className="mb-6">
-          <p className="text-sm text-primary font-medium">Boleta de salida · Edición 4</p>
-          <h1 className="mt-1 text-xl sm:text-2xl font-semibold tracking-tight font-serif">
+          <p className="text-eyebrow text-primary">Boleta de salida · Edición 4</p>
+          <h1 className="mt-1.5 text-xl sm:text-2xl font-semibold tracking-tight font-serif">
             Mírate ahora, mira al Diego que llegó. Lo que escribas hoy es tu testimonio.
           </h1>
           <div className="mt-5 h-1.5 bg-border rounded-full overflow-hidden">
@@ -36,16 +36,16 @@ function Salida() {
           {/* Entrada (compact card on top in mobile, left column on desktop) */}
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="rounded-lg border border-dashed border-border p-3 bg-muted/30 flex sm:block items-center justify-between gap-3">
-              <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Tu boleta de entrada</p>
+              <p className="text-eyebrow">Tu boleta de entrada</p>
               <p className="sm:mt-1 text-2xl sm:text-3xl font-semibold text-muted-foreground">
                 {DIEGO.entrada[dim.key]}<span className="text-xs text-muted-foreground font-normal"> /5</span>
               </p>
             </div>
             <div className="rounded-lg border border-primary/30 p-3 bg-primary/5">
-              <p className="text-[11px] uppercase tracking-wider text-primary">Hoy te das</p>
+              <p className="text-eyebrow text-primary">Hoy te das</p>
               <div className="mt-2 flex gap-1.5">
                 {[1,2,3,4,5].map((n) => (
-                  <button key={n} className={`flex-1 min-h-[44px] rounded border text-sm font-medium ${n === Math.round(DIEGO.actual[dim.key]) ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/50"}`}>
+                  <button key={n} className={`flex-1 min-h-[44px] rounded border text-sm font-medium press focusable ${n === Math.round(DIEGO.actual[dim.key]) ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/50"}`}>
                     {n}
                   </button>
                 ))}
@@ -54,8 +54,8 @@ function Salida() {
           </div>
 
           <div className="mt-5">
-            <label className="text-sm font-medium">¿Qué cambió en ti?</label>
-            <textarea rows={4} className="mt-2 w-full p-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none" placeholder="Una historia, una sesión, una conversación que te marcó..." />
+            <label htmlFor="cambio" className="text-sm font-medium">¿Qué cambió en ti?</label>
+            <textarea id="cambio" rows={4} className="mt-2 w-full p-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none focusable" placeholder="Una historia, una sesión, una conversación que te marcó..." />
           </div>
 
           {/* Desktop inline actions */}
@@ -110,7 +110,7 @@ function Salida() {
 
 function Celebracion() {
   return (
-    <div className="min-h-screen bg-background px-6 py-12 fade-in">
+    <div className="min-h-screen bg-background px-4 sm:px-6 py-10 sm:py-12 fade-in">
       <div className="max-w-3xl mx-auto text-center">
         <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-gold/15 text-foreground border border-gold/40">
           <Sparkles className="size-3" /> Edición 4 · Graduación
@@ -118,21 +118,21 @@ function Celebracion() {
         <h1 className="mt-5 text-4xl lg:text-5xl font-semibold tracking-tight">Esto fue tu camino, Diego.</h1>
         <p className="mt-4 text-muted-foreground font-serif text-lg">"Acá nadie se queda atrás."</p>
 
-        <div className="mt-10 card-soft p-6">
+        <div className="mt-10 card-soft p-4 sm:p-6">
           <RadarCompare entrada={DIEGO.entrada} actual={DIEGO.actual} height={380} labelEntrada="Cuando llegaste" labelActual="Cuando te gradúas" />
         </div>
 
-        <div className="mt-8 card-soft p-6 text-left">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider">Recordemos por qué empezaste</p>
+        <div className="mt-8 card-soft p-5 sm:p-6 text-left">
+          <p className="text-eyebrow">Recordemos por qué empezaste</p>
           <p className="mt-2 font-serif text-xl italic">"{DIEGO.motivacion}"</p>
           <p className="mt-2 text-sm text-muted-foreground">— Tú, hace 26 semanas.</p>
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link to="/becario/certificado" className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90">
+        <div className="mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3">
+          <Link to="/becario/certificado" className="touch-target gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 press focusable">
             <Download className="size-4" /> Descargar mi certificado
           </Link>
-          <Link to="/alumni" className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-border hover:border-primary text-sm font-medium">
+          <Link to="/alumni" className="touch-target gap-2 px-5 py-3 rounded-lg border border-border hover:border-primary text-sm font-medium press focusable">
             <Users2 className="size-4" /> Entrar a la Red Alumni
           </Link>
         </div>

@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Download, FileSpreadsheet, FileText } from "lucide-react";
+import { FileSpreadsheet, FileText } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { DIMENSIONS, BECARIOS } from "@/lib/mock-data";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/equipo/reportes")({
   component: Reportes,
@@ -15,39 +16,39 @@ function Reportes() {
   });
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-8 fade-in">
-      <header className="mb-6">
-        <h1 className="text-3xl font-semibold tracking-tight">Reportes para donantes</h1>
-        <p className="mt-1 text-muted-foreground">Genera el informe semestral con un par de clics.</p>
-      </header>
+    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 fade-in">
+      <PageHeader
+        title="Reportes para donantes"
+        description="Genera el informe semestral con un par de clics."
+      />
 
-      <div className="card-soft p-5 mb-6 flex flex-wrap items-end gap-4">
-        <div>
-          <label className="text-xs text-muted-foreground">Plantilla</label>
-          <select className="block mt-1 text-sm px-3 py-2 rounded-md border border-border bg-surface">
+      <div className="card-soft p-4 sm:p-5 mb-6 flex flex-wrap items-end gap-4">
+        <label className="flex-1 sm:flex-none min-w-[8rem]">
+          <span className="text-meta">Plantilla</span>
+          <select className="block mt-1 w-full text-sm min-h-[44px] px-3 rounded-md border border-border bg-surface focusable">
             <option>Delosi</option><option>BCP</option><option>Scotiabank</option><option>Personalizado</option>
           </select>
-        </div>
-        <div>
-          <label className="text-xs text-muted-foreground">Cohorte</label>
-          <select className="block mt-1 text-sm px-3 py-2 rounded-md border border-border bg-surface">
+        </label>
+        <label className="flex-1 sm:flex-none min-w-[8rem]">
+          <span className="text-meta">Cohorte</span>
+          <select className="block mt-1 w-full text-sm min-h-[44px] px-3 rounded-md border border-border bg-surface focusable">
             <option>Edición 4 (2026)</option><option>Edición 3 (2025)</option>
           </select>
-        </div>
-        <div>
-          <label className="text-xs text-muted-foreground">Rango</label>
-          <select className="block mt-1 text-sm px-3 py-2 rounded-md border border-border bg-surface">
+        </label>
+        <label className="flex-1 sm:flex-none min-w-[8rem]">
+          <span className="text-meta">Rango</span>
+          <select className="block mt-1 w-full text-sm min-h-[44px] px-3 rounded-md border border-border bg-surface focusable">
             <option>Ene 2026 — Jul 2026</option>
           </select>
-        </div>
-        <div className="ml-auto flex gap-2">
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium"><FileText className="size-4" /> PDF</button>
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border text-sm font-medium"><FileSpreadsheet className="size-4" /> Excel</button>
+        </label>
+        <div className="sm:ml-auto flex gap-2 w-full sm:w-auto">
+          <button className="flex-1 sm:flex-none touch-target gap-2 px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium press focusable"><FileText className="size-4" /> PDF</button>
+          <button className="flex-1 sm:flex-none touch-target gap-2 px-4 rounded-md border border-border text-sm font-medium press focusable"><FileSpreadsheet className="size-4" /> Excel</button>
         </div>
       </div>
 
-      <section className="card-soft p-6 mb-6">
-        <p className="text-xs uppercase tracking-wider text-muted-foreground">Plantilla Delosi · Vista previa</p>
+      <section className="card-soft p-5 sm:p-6 mb-6">
+        <p className="text-eyebrow">Plantilla Delosi · Vista previa</p>
         <h2 className="mt-1 text-2xl font-semibold">Crecimiento promedio por dimensión</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data} margin={{ top: 20, right: 10, left: -10, bottom: 5 }}>
@@ -67,7 +68,7 @@ function Reportes() {
         <Stat label="Regiones impactadas" v="25" sub="cobertura nacional" />
       </div>
 
-      <section className="card-soft p-6 mb-6">
+      <section className="card-soft p-5 sm:p-6 mb-6">
         <h2 className="font-semibold mb-3">Casos destacados</h2>
         <div className="grid md:grid-cols-3 gap-4">
           {[
@@ -83,7 +84,7 @@ function Reportes() {
         </div>
       </section>
 
-      <section className="card-soft p-6">
+      <section className="card-soft p-5 sm:p-6">
         <h2 className="font-semibold mb-3">Alineación con ODS</h2>
         <div className="flex flex-wrap gap-2">
           {["ODS 4 · Educación", "ODS 5 · Igualdad de género", "ODS 10 · Reducción desigualdades", "ODS 16 · Paz e instituciones", "ODS 17 · Alianzas"].map((o) => (
@@ -100,7 +101,7 @@ function Stat({ label, v, sub }: { label: string; v: string; sub: string }) {
     <div className="card-soft p-5">
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="mt-1 text-3xl font-semibold tracking-tight">{v}</p>
-      <p className="text-[11px] text-muted-foreground">{sub}</p>
+      <p className="text-meta">{sub}</p>
     </div>
   );
 }

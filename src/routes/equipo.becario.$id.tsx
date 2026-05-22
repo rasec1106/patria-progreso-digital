@@ -26,9 +26,9 @@ function BecarioDetalle() {
           <p className="mt-1 text-xs text-primary font-medium">Edición {b.edicion} · Semana {b.semana} de 26</p>
           <p className="mt-3 text-sm font-serif italic max-w-xl">"{b.motivacion}"</p>
         </div>
-        <div className="flex gap-2">
-          <button className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-sm hover:border-primary"><Mail className="size-4" /> Contactar</button>
-          <button className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"><MessageSquarePlus className="size-4" /> Dejar comentario</button>
+        <div className="flex gap-2 w-full sm:w-auto">
+          <button className="flex-1 sm:flex-none touch-target gap-1.5 px-3 rounded-lg border border-border text-sm hover:border-primary press focusable"><Mail className="size-4" /> Contactar</button>
+          <button className="flex-1 sm:flex-none touch-target gap-1.5 px-3 rounded-lg bg-primary text-primary-foreground text-sm font-medium press focusable"><MessageSquarePlus className="size-4" /> Dejar comentario</button>
         </div>
       </header>
 
@@ -62,13 +62,15 @@ function BecarioDetalle() {
             })}
           </ul>
           <div className="mt-5 border-t border-border pt-4">
-            <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Dejar comentario</p>
-            <select className="w-full text-sm p-2 rounded-md border border-border bg-surface mb-2">
+            <p className="text-eyebrow mb-2">Dejar comentario</p>
+            <label htmlFor="fb-dim" className="sr-only">Dimensión</label>
+            <select id="fb-dim" className="w-full text-sm min-h-[44px] px-3 rounded-md border border-border bg-surface mb-2 focusable">
               <option>Selecciona dimensión</option>
               {DIMENSIONS.map((d) => <option key={d.key}>{d.label}</option>)}
             </select>
-            <textarea rows={3} className="w-full text-sm p-2 rounded-md border border-border bg-surface" placeholder="Escribe tu observación..." />
-            <button className="mt-2 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-sm font-medium">Guardar</button>
+            <label htmlFor="fb-text" className="sr-only">Observación</label>
+            <textarea id="fb-text" rows={3} className="w-full text-sm p-2 rounded-md border border-border bg-surface focusable" placeholder="Escribe tu observación..." />
+            <button className="mt-2 touch-target px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium press focusable">Guardar</button>
           </div>
         </section>
       </div>

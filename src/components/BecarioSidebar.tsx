@@ -21,7 +21,7 @@ export function BecarioSidebar() {
           <div className="min-w-0">
             <p className="text-sm font-semibold leading-tight truncate">{DIEGO.nombre.split(" ").slice(0,2).join(" ")}</p>
             <p className="text-xs text-muted-foreground truncate">{DIEGO.region}</p>
-            <p className="text-[11px] text-primary font-medium mt-0.5">Edición 4 — 2026</p>
+            <p className="text-xs text-primary font-medium mt-0.5">Edición 4 — 2026</p>
           </div>
         </div>
       </div>
@@ -30,18 +30,18 @@ export function BecarioSidebar() {
           const active = it.exact ? path === it.to : path.startsWith(it.to);
           const Icon = it.icon;
           return (
-            <Link key={it.to} to={it.to}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${active ? "bg-primary/10 text-primary font-medium" : "text-foreground/80 hover:bg-muted"}`}>
+            <Link key={it.to} to={it.to} aria-current={active ? "page" : undefined}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors focusable ${active ? "bg-primary/10 text-primary font-medium" : "text-foreground/80 hover:bg-muted"}`}>
               <Icon className="size-4" /> {it.label}
             </Link>
           );
         })}
       </nav>
       <div className="p-4 border-t border-border">
-        <Link to="/" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground">
+        <Link to="/" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground focusable rounded-md">
           <LogOut className="size-3.5" /> Cerrar sesión
         </Link>
-        <p className="mt-3 text-[10px] uppercase tracking-widest text-muted-foreground">Patria C · #PerúTeQuiero</p>
+        <p className="mt-3 text-eyebrow tracking-widest">Patria C · #PerúTeQuiero</p>
       </div>
     </aside>
   );
