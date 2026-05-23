@@ -1,0 +1,188 @@
+/* Wireframe esqueleto: máxima lo-fi.
+   Activación: <html data-wireframe="skeleton"> (vía ?wf=skeleton).
+   Texto convertido en barras grises, imágenes e iconos en cajas grises.
+   Solo se ve la composición y jerarquía visual, sin contenido legible. */
+
+[data-wireframe="skeleton"] {
+  --background: oklch(0.97 0 0);
+  --foreground: oklch(0.85 0 0);
+  --surface: oklch(1 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.85 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.85 0 0);
+
+  --primary: oklch(0.82 0 0);
+  --primary-foreground: oklch(0.82 0 0);
+
+  --secondary: oklch(0.9 0 0);
+  --secondary-foreground: oklch(0.85 0 0);
+
+  --muted: oklch(0.94 0 0);
+  --muted-foreground: oklch(0.85 0 0);
+
+  --accent: oklch(0.9 0 0);
+  --accent-foreground: oklch(0.85 0 0);
+
+  --destructive: oklch(0.82 0 0);
+  --destructive-foreground: oklch(0.82 0 0);
+
+  --border: oklch(0.82 0 0);
+  --input: oklch(0.88 0 0);
+  --ring: oklch(0.78 0 0);
+
+  --gold: oklch(0.85 0 0);
+  --gold-foreground: oklch(0.85 0 0);
+  --success: oklch(0.85 0 0);
+  --success-foreground: oklch(0.85 0 0);
+  --warning: oklch(0.85 0 0);
+  --warning-foreground: oklch(0.85 0 0);
+
+  --chart-1: oklch(0.78 0 0);
+  --chart-2: oklch(0.82 0 0);
+  --chart-3: oklch(0.86 0 0);
+  --chart-4: oklch(0.9 0 0);
+  --chart-5: oklch(0.93 0 0);
+
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.85 0 0);
+  --sidebar-primary: oklch(0.82 0 0);
+  --sidebar-primary-foreground: oklch(0.82 0 0);
+  --sidebar-accent: oklch(0.94 0 0);
+  --sidebar-accent-foreground: oklch(0.85 0 0);
+  --sidebar-border: oklch(0.85 0 0);
+  --sidebar-ring: oklch(0.78 0 0);
+}
+
+/* Texto → barras grises.
+   color: transparent oculta el glifo; el background del propio elemento
+   se convierte en la "barra". box-decoration-break: clone hace que en
+   multi-línea cada línea sea su propia barra. */
+[data-wireframe="skeleton"] h1,
+[data-wireframe="skeleton"] h2,
+[data-wireframe="skeleton"] h3,
+[data-wireframe="skeleton"] h4,
+[data-wireframe="skeleton"] h5,
+[data-wireframe="skeleton"] h6,
+[data-wireframe="skeleton"] p,
+[data-wireframe="skeleton"] span,
+[data-wireframe="skeleton"] a,
+[data-wireframe="skeleton"] label,
+[data-wireframe="skeleton"] li,
+[data-wireframe="skeleton"] dt,
+[data-wireframe="skeleton"] dd,
+[data-wireframe="skeleton"] time,
+[data-wireframe="skeleton"] small,
+[data-wireframe="skeleton"] strong,
+[data-wireframe="skeleton"] em,
+[data-wireframe="skeleton"] b,
+[data-wireframe="skeleton"] i,
+[data-wireframe="skeleton"] code,
+[data-wireframe="skeleton"] th,
+[data-wireframe="skeleton"] td,
+[data-wireframe="skeleton"] button,
+[data-wireframe="skeleton"] [class*="text-"] {
+  color: transparent !important;
+  text-shadow: none !important;
+  background-color: oklch(0.86 0 0) !important;
+  background-image: none !important;
+  border-radius: 4px !important;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Inputs: caja gris vacía, sin placeholder visible */
+[data-wireframe="skeleton"] input,
+[data-wireframe="skeleton"] textarea,
+[data-wireframe="skeleton"] select {
+  color: transparent !important;
+  caret-color: transparent;
+  background-color: oklch(0.94 0 0) !important;
+  border-color: oklch(0.85 0 0) !important;
+}
+
+[data-wireframe="skeleton"] input::placeholder,
+[data-wireframe="skeleton"] textarea::placeholder {
+  color: transparent !important;
+}
+
+/* SVG (iconos Lucide) → cuadritos grises uniformes */
+[data-wireframe="skeleton"] svg {
+  color: oklch(0.82 0 0) !important;
+  fill: oklch(0.82 0 0) !important;
+  stroke: oklch(0.82 0 0) !important;
+}
+
+[data-wireframe="skeleton"] svg * {
+  color: oklch(0.82 0 0) !important;
+  fill: oklch(0.82 0 0) !important;
+  stroke: oklch(0.82 0 0) !important;
+}
+
+/* Recharts: gráficos como bloques grises */
+[data-wireframe="skeleton"] svg.recharts-surface * {
+  fill: oklch(0.86 0 0) !important;
+  stroke: oklch(0.82 0 0) !important;
+}
+
+/* Imágenes y avatares → cajas grises uniformes (la imagen no se ve) */
+[data-wireframe="skeleton"] img {
+  filter: brightness(0) invert(0.86) !important;
+  background-color: oklch(0.86 0 0);
+}
+
+/* Cards y contenedores: solo borde y sombra removida */
+[data-wireframe="skeleton"] .card-soft {
+  box-shadow: none !important;
+  border: 1px solid oklch(0.85 0 0) !important;
+  background-color: oklch(1 0 0) !important;
+}
+
+/* Anula gradientes de marca */
+[data-wireframe="skeleton"] .patria-gradient,
+[data-wireframe="skeleton"] .gold-gradient {
+  background: oklch(0.82 0 0) !important;
+}
+
+/* Botones: cajas grises con borde, sin gradiente */
+[data-wireframe="skeleton"] button {
+  background-color: oklch(0.88 0 0) !important;
+  background-image: none !important;
+  border: 1px solid oklch(0.78 0 0) !important;
+  box-shadow: none !important;
+}
+
+/* Badges, chips, status pills: cajas pequeñas */
+[data-wireframe="skeleton"] [class*="badge"],
+[data-wireframe="skeleton"] [class*="chip"],
+[data-wireframe="skeleton"] [class*="pill"] {
+  background-color: oklch(0.88 0 0) !important;
+  background-image: none !important;
+  border-color: oklch(0.82 0 0) !important;
+}
+
+/* Progress bars y sliders */
+[data-wireframe="skeleton"] [class*="progress"],
+[data-wireframe="skeleton"] [role="progressbar"] {
+  background-color: oklch(0.92 0 0) !important;
+}
+
+/* Cualquier elemento con background colorido se neutraliza */
+[data-wireframe="skeleton"] [class*="bg-primary"],
+[data-wireframe="skeleton"] [class*="bg-secondary"],
+[data-wireframe="skeleton"] [class*="bg-accent"],
+[data-wireframe="skeleton"] [class*="bg-success"],
+[data-wireframe="skeleton"] [class*="bg-warning"],
+[data-wireframe="skeleton"] [class*="bg-destructive"],
+[data-wireframe="skeleton"] [class*="bg-gold"] {
+  background-color: oklch(0.9 0 0) !important;
+  background-image: none !important;
+}
+
+/* Anula animaciones para una vista estática y predecible */
+[data-wireframe="skeleton"] *,
+[data-wireframe="skeleton"] *::before,
+[data-wireframe="skeleton"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
