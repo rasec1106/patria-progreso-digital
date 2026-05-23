@@ -11,13 +11,18 @@ export const Route = createFileRoute("/becario/boleta-salida")({
 function Salida() {
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
+  const [scores, setScores] = useState<Record<string, number>>(() =>
+    Object.fromEntries(DIMENSIONS.map((d) => [d.key, Math.round(DIEGO.actual[d.key])]))
+  );
+  const [notes, setNotes] = useState<Record<string, string>>({});
   const dim = DIMENSIONS[step];
+  const currentScore = scores[dim.key];
 
   if (done) return <Celebracion />;
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-32 sm:pb-10 fade-in">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-44 sm:pb-10 fade-in">
         <header className="mb-6">
           <p className="text-eyebrow text-primary">Boleta de salida · Edición 4</p>
           <h1 className="mt-1.5 text-xl sm:text-2xl font-semibold tracking-tight font-serif">
@@ -45,7 +50,11 @@ function Salida() {
               <p className="text-eyebrow text-primary">Hoy te das</p>
               <div className="mt-2 flex gap-1.5">
                 {[1,2,3,4,5].map((n) => (
-                  <button key={n} className={`flex-1 min-h-[44px] rounded border text-sm font-medium press focusable ${n === Math.round(DIEGO.actual[dim.key]) ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/50"}`}>
+                  <button
+                    key={n}
+                    onClick={() => setScores((s) => ({ ...s, [dim.key]: n }))}
+                    className={`flex-1 min-h-[44px] rounded border text-sm font-medium press focusable ${n === currentScore ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary/50"}`}
+                  >
                     {n}
                   </button>
                 ))}
@@ -55,7 +64,14 @@ function Salida() {
 
           <div className="mt-5">
             <label htmlFor="cambio" className="text-sm font-medium">¿Qué cambió en ti?</label>
-            <textarea id="cambio" rows={4} className="mt-2 w-full p-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none focusable" placeholder="Una historia, una sesión, una conversación que te marcó..." />
+            <textarea
+              id="cambio"
+              rows={4}
+              value={notes[dim.key] ?? ""}
+              onChange={(e) => setNotes((n) => ({ ...n, [dim.key]: e.target.value }))}
+              className="mt-2 w-full p-3 rounded-lg border border-border bg-surface text-sm focus:border-primary outline-none focusable"
+              placeholder="Una historia, una sesión, una conversación que te marcó..."
+            />
           </div>
 
           {/* Desktop inline actions */}
@@ -76,10 +92,10 @@ function Salida() {
         </div>
       </div>
 
-      {/* Mobile sticky bottom bar */}
+      {/* Mobile sticky bottom bar — sits above BecarioBottomNav */}
       <div
-        className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-surface/95 backdrop-blur border-t border-border px-4 py-3 flex items-center gap-3"
-        style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+        className="sm:hidden fixed inset-x-0 z-40 bg-surface/95 backdrop-blur border-t border-border px-4 py-3 flex items-center gap-3"
+        style={{ bottom: "calc(56px + env(safe-area-inset-bottom))" }}
       >
         <button
           onClick={() => setStep((s) => Math.max(0, s-1))}
