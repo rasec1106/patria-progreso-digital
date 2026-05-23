@@ -1,0 +1,131 @@
+/* Wireframe lo-fi: sketchy / hecho a mano.
+   Activación: <html data-wireframe="sketchy"> (vía ?wf=sketchy).
+   Tipografía handwritten, bordes punteados, sensación de boceto. */
+
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&display=swap");
+
+[data-wireframe="sketchy"] {
+  --font-sans: "Patrick Hand", "Caveat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Caveat", ui-serif, Georgia, serif;
+
+  --background: oklch(0.985 0.003 95);
+  --foreground: oklch(0.22 0 0);
+  --surface: oklch(1 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0 0);
+
+  --primary: oklch(0.3 0 0);
+  --primary-foreground: oklch(0.985 0.003 95);
+
+  --secondary: oklch(0.93 0 0);
+  --secondary-foreground: oklch(0.22 0 0);
+
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+
+  --accent: oklch(0.93 0 0);
+  --accent-foreground: oklch(0.22 0 0);
+
+  --destructive: oklch(0.4 0 0);
+  --destructive-foreground: oklch(0.985 0.003 95);
+
+  --border: oklch(0.35 0 0);
+  --input: oklch(0.85 0 0);
+  --ring: oklch(0.4 0 0);
+
+  --gold: oklch(0.7 0 0);
+  --gold-foreground: oklch(0.22 0 0);
+  --success: oklch(0.5 0 0);
+  --success-foreground: oklch(0.985 0.003 95);
+  --warning: oklch(0.6 0 0);
+  --warning-foreground: oklch(0.22 0 0);
+
+  --chart-1: oklch(0.3 0 0);
+  --chart-2: oklch(0.45 0 0);
+  --chart-3: oklch(0.6 0 0);
+  --chart-4: oklch(0.72 0 0);
+  --chart-5: oklch(0.85 0 0);
+
+  --sidebar: oklch(0.99 0 0);
+  --sidebar-foreground: oklch(0.22 0 0);
+  --sidebar-primary: oklch(0.3 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0.003 95);
+  --sidebar-accent: oklch(0.94 0 0);
+  --sidebar-accent-foreground: oklch(0.22 0 0);
+  --sidebar-border: oklch(0.35 0 0);
+  --sidebar-ring: oklch(0.4 0 0);
+}
+
+/* Tipografía manuscrita en todo */
+[data-wireframe="sketchy"] body,
+[data-wireframe="sketchy"] button,
+[data-wireframe="sketchy"] input,
+[data-wireframe="sketchy"] textarea,
+[data-wireframe="sketchy"] select {
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+
+[data-wireframe="sketchy"] h1,
+[data-wireframe="sketchy"] h2,
+[data-wireframe="sketchy"] h3,
+[data-wireframe="sketchy"] h4,
+[data-wireframe="sketchy"] .text-display,
+[data-wireframe="sketchy"] .text-h1,
+[data-wireframe="sketchy"] .text-h2,
+[data-wireframe="sketchy"] .text-h3 {
+  font-family: "Caveat", cursive;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+
+/* Bordes punteados / irregulares */
+[data-wireframe="sketchy"] *,
+[data-wireframe="sketchy"] *::before,
+[data-wireframe="sketchy"] *::after {
+  border-style: dashed !important;
+}
+
+[data-wireframe="sketchy"] .card-soft,
+[data-wireframe="sketchy"] [class*="rounded"] {
+  box-shadow: 2px 2px 0 0 oklch(0.35 0 0) !important;
+  border-width: 1.5px !important;
+}
+
+[data-wireframe="sketchy"] .patria-gradient,
+[data-wireframe="sketchy"] .gold-gradient {
+  background: oklch(0.4 0 0) !important;
+  border: 1.5px dashed oklch(0.22 0 0) !important;
+}
+
+/* Botones con bordes manuales */
+[data-wireframe="sketchy"] button {
+  border: 1.5px dashed oklch(0.22 0 0) !important;
+  border-radius: 6px !important;
+}
+
+/* Imágenes como placeholders dibujados */
+[data-wireframe="sketchy"] img {
+  filter: grayscale(1) contrast(0.6) opacity(0.4);
+  border: 1.5px dashed oklch(0.35 0 0);
+  border-radius: 4px;
+}
+
+/* Avatares mantienen forma circular pero con borde dibujado */
+[data-wireframe="sketchy"] img[class*="rounded-full"] {
+  border-radius: 9999px;
+  background: oklch(0.92 0 0);
+}
+
+[data-wireframe="sketchy"] svg.recharts-surface {
+  filter: grayscale(1);
+}
+
+/* Reduce border-radius para sensación más manual */
+[data-wireframe="sketchy"] [class*="rounded-lg"],
+[data-wireframe="sketchy"] [class*="rounded-xl"],
+[data-wireframe="sketchy"] [class*="rounded-2xl"] {
+  border-radius: 8px !important;
+}

@@ -1,0 +1,131 @@
+/* Wireframe lo-fi: blueprint / esquemático.
+   Activación: <html data-wireframe="blueprint"> (vía ?wf=blueprint).
+   Fondo claro, todo en azul oscuro, bordes punteados, sensación de diagrama técnico. */
+
+[data-wireframe="blueprint"] {
+  --background: oklch(0.97 0.015 220);
+  --foreground: oklch(0.32 0.08 240);
+  --surface: oklch(0.99 0.01 220);
+  --card: oklch(0.99 0.01 220);
+  --card-foreground: oklch(0.32 0.08 240);
+  --popover: oklch(0.99 0.01 220);
+  --popover-foreground: oklch(0.32 0.08 240);
+
+  --primary: oklch(0.32 0.08 240);
+  --primary-foreground: oklch(0.97 0.015 220);
+
+  --secondary: oklch(0.92 0.02 220);
+  --secondary-foreground: oklch(0.32 0.08 240);
+
+  --muted: oklch(0.94 0.015 220);
+  --muted-foreground: oklch(0.45 0.06 240);
+
+  --accent: oklch(0.92 0.02 220);
+  --accent-foreground: oklch(0.32 0.08 240);
+
+  --destructive: oklch(0.32 0.08 240);
+  --destructive-foreground: oklch(0.97 0.015 220);
+
+  --border: oklch(0.45 0.08 240);
+  --input: oklch(0.85 0.03 220);
+  --ring: oklch(0.32 0.08 240);
+
+  --gold: oklch(0.55 0.08 240);
+  --gold-foreground: oklch(0.97 0.015 220);
+  --success: oklch(0.4 0.08 240);
+  --success-foreground: oklch(0.97 0.015 220);
+  --warning: oklch(0.5 0.08 240);
+  --warning-foreground: oklch(0.97 0.015 220);
+
+  --chart-1: oklch(0.32 0.08 240);
+  --chart-2: oklch(0.45 0.08 240);
+  --chart-3: oklch(0.55 0.06 240);
+  --chart-4: oklch(0.65 0.05 240);
+  --chart-5: oklch(0.75 0.04 240);
+
+  --sidebar: oklch(0.95 0.015 220);
+  --sidebar-foreground: oklch(0.32 0.08 240);
+  --sidebar-primary: oklch(0.32 0.08 240);
+  --sidebar-primary-foreground: oklch(0.97 0.015 220);
+  --sidebar-accent: oklch(0.92 0.02 220);
+  --sidebar-accent-foreground: oklch(0.32 0.08 240);
+  --sidebar-border: oklch(0.45 0.08 240);
+  --sidebar-ring: oklch(0.32 0.08 240);
+}
+
+/* Tipografía monoespaciada para sensación técnica */
+[data-wireframe="blueprint"] body,
+[data-wireframe="blueprint"] button,
+[data-wireframe="blueprint"] input,
+[data-wireframe="blueprint"] textarea,
+[data-wireframe="blueprint"] select,
+[data-wireframe="blueprint"] h1,
+[data-wireframe="blueprint"] h2,
+[data-wireframe="blueprint"] h3,
+[data-wireframe="blueprint"] h4 {
+  font-family: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace !important;
+  letter-spacing: 0;
+}
+
+/* Bordes punteados azules en todo lo que tenga borde */
+[data-wireframe="blueprint"] *,
+[data-wireframe="blueprint"] *::before,
+[data-wireframe="blueprint"] *::after {
+  border-style: dashed !important;
+}
+
+[data-wireframe="blueprint"] .card-soft,
+[data-wireframe="blueprint"] [class*="border"] {
+  border-width: 1px !important;
+  box-shadow: none !important;
+}
+
+/* Anula gradientes */
+[data-wireframe="blueprint"] .patria-gradient,
+[data-wireframe="blueprint"] .gold-gradient {
+  background: oklch(0.45 0.08 240) !important;
+  border: 1px dashed oklch(0.32 0.08 240) !important;
+}
+
+/* Imágenes como placeholders esquemáticos */
+[data-wireframe="blueprint"] img {
+  opacity: 0;
+}
+
+[data-wireframe="blueprint"] img::before,
+[data-wireframe="blueprint"] img {
+  background:
+    linear-gradient(45deg, transparent 49%, oklch(0.45 0.08 240) 49%, oklch(0.45 0.08 240) 51%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, oklch(0.45 0.08 240) 49%, oklch(0.45 0.08 240) 51%, transparent 51%),
+    oklch(0.94 0.015 220);
+  opacity: 1;
+  border: 1px dashed oklch(0.45 0.08 240) !important;
+}
+
+/* Patrón de grid sutil en el body */
+[data-wireframe="blueprint"] body {
+  background-image:
+    linear-gradient(oklch(0.88 0.02 220) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.88 0.02 220) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+}
+
+/* Anula filtros de gradiente en charts */
+[data-wireframe="blueprint"] svg.recharts-surface {
+  filter: hue-rotate(180deg) saturate(0.6);
+}
+
+/* Quita sombras redondeadas excesivas */
+[data-wireframe="blueprint"] [class*="rounded-2xl"],
+[data-wireframe="blueprint"] [class*="rounded-xl"] {
+  border-radius: 4px !important;
+}
+
+[data-wireframe="blueprint"] [class*="rounded-lg"] {
+  border-radius: 3px !important;
+}
+
+[data-wireframe="blueprint"] [class*="rounded-full"] {
+  border-radius: 9999px !important;
+}
